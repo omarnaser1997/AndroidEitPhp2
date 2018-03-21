@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AndroidEitServer</string>
+    <string name="slogan">We transport products to customers as quicky as our ex betrays</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tracking_order">TrackingOrder</string>
+    <string name="forgot_pwd"><u>Forgot Password?</u></string>
+
+    <string name="facebook_app_id">183920575669167</string>
+    <string name="facebook_login_protocol_name">fb183920575669167</string>
+
+</resources>

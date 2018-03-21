@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "com.naser.omar.androideitserverphp"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.7
+        sourceCompatibility 1.7
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    productFlavors {
+    }
+
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.android.gms:play-services-maps:10.2.0'
+    implementation 'com.google.android.gms:play-services:10.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    ///////////////
+    compile 'com.android.volley:volley:1.0.0'
+    //////////////
+    //Add library for part 1
+    compile 'info.hoang8f:fbutton:1.0.5'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    //Add library for part 2
+    compile 'com.android.support:cardview-v7:26.+'
+    compile 'com.android.support:recyclerview-v7:26.+'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.firebaseui:firebase-ui-database:1.2.0'
+    //Add library for part 4
+    compile 'com.android.support:design:26.+'
+    compile 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    //Add library for part 5
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+    //Add library for part 7
+    compile 'com.github.mancj:MaterialSearchBar:0.7.5'
+    //Add library for part 9
+    //this library for upload picture
+    implementation files('libs/KGJsonConverter.jar')
+    implementation files('libs/gson-2.2.4.jar')
+    compile 'com.github.amigold.fundapter:library:1.0'
+    implementation files('libs/PhotoUtil.jar')
+    implementation files('libs/GenAsync.jar')
+    // part 13
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+    // part 14
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    //part 16
+    compile 'io.paperdb:paperdb:2.1'//this library for help write Key_Value to Android memory
+    compile 'com.github.rey5137:material:1.2.4'
+//this library for Add Material check Box to your project
+    //part 20
+    compile 'com.stepstone.apprating:app-rating:2.0.0'//this libraray for Rating
+    //part 25
+    compile 'com.github.d-max:spots-dialog:0.7@aar'//for using sport dialog
+    //part 26 Add facebook share
+    compile 'com.facebook.android:facebook-share:[4,5)'
+
+    //APIs to integrate with Messenger are included in the Facebook SDK for Android
+    compile 'com.facebook.android:facebook-messenger:[4,5)'
+    //part 32  CounterFAB
+    //A FloatingActionButton subclass that shows a counter badge on right top corner
+    compile 'com.github.andremion:counterfab:1.0.1'
+
+    compile 'com.facebook.android:facebook-android-sdk:4.28.0'
+
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+
+}

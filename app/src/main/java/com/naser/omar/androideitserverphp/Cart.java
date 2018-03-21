@@ -1,0 +1,223 @@
+package com.naser.omar.androideitserverphp;
+
+import android.content.DialogInterface;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.naser.omar.androideitserverphp.Model.Request;
+import com.naser.omar.androideitserverphp.Common.Common;
+import com.naser.omar.androideitserverphp.Database.Database;
+import com.naser.omar.androideitserverphp.Model.Order;
+import com.naser.omar.androideitserverphp.ViewHolder.CartAdapter;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import info.hoang8f.widget.FButton;
+
+
+
+public class Cart extends AppCompatActivity implements Response.Listener<String> {
+
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    public TextView txtTotalPrice;
+    FButton btnPlace;
+    List<Order> cart =new ArrayList<>();
+    CartAdapter adapter;
+    RelativeLayout rootLayout;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart2);
+        //init
+        recyclerView=(RecyclerView)findViewById(R.id.list_Cart);
+        recyclerView.setHasFixedSize(true);
+        layoutManager= new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        rootLayout=(RelativeLayout)findViewById(R.id.rootLayoutcart);
+        txtTotalPrice=(TextView)findViewById(R.id.total);
+        btnPlace=(FButton)findViewById(R.id.btnPlaceOrder);
+
+        btnPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (cart.size() >0) {
+                    ShowAlertDialog();
+                }else {
+                    Toast.makeText(Cart.this, "Your cart is empty !!!", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+        loadListFood();
+
+
+    }
+
+    private void ShowAlertDialog(){
+
+        AlertDialog.Builder alertDialog =new AlertDialog.Builder(Cart.this);
+        alertDialog.setTitle("One more step!");
+        alertDialog.setMessage("Enter your address:");
+
+        LayoutInflater inflater =this.getLayoutInflater();
+        View order_address_comment=inflater.inflate(R.layout.order_address_comment,null);
+        final MaterialEditText edtAddress=(MaterialEditText)order_address_comment.findViewById(R.id.edtAddress);
+        final MaterialEditText edtComment=(MaterialEditText)order_address_comment.findViewById(R.id.edtComment);
+
+        alertDialog.setView(order_address_comment);
+        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        alertDialog.setPositiveButton("YES",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //Create new Request
+                Request request=new Request(
+                        Common.currentUser.getNumber(),
+                        Common.currentUser.getName(),
+                        edtAddress.getText().toString(),
+                        txtTotalPrice.getText().toString(),
+                        cart
+                );
+                //submit to php
+                //we will using System.currentMill to key
+                UplodeRequestToServer(request,String.valueOf(System.currentTimeMillis()));
+
+
+                //Delete cart
+                new Database(getBaseContext()).cleanCart();
+                Toast.makeText(Cart.this, "Thank you , Order Place", Toast.LENGTH_SHORT).show();
+                finish();
+
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
+    private void UplodeRequestToServer(final Request request,final String dataRequest) {
+
+
+        StringRequest stringRequest=new StringRequest(com.android.volley.Request.Method.POST, "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/SetRequest.php", (Response.Listener<String>) this, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+
+            }
+        }){
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+               Log.d("omarrrr",dataRequest);
+                params.put("Phone",request.getPhone());//typProdect
+
+                params.put("Name",request.getName());//typProdect
+
+                params.put("Addres",request.getAddress());//typProdect
+
+                params.put("Tooal",request.getTooal());//typProdect
+
+                //params.put("Status",request.getStatus());//typProdect
+
+                params.put("Requests",dataRequest);//typProdect
+               // params.put("FK_Number",categoryId);//typProdect
+
+                return params;
+            }
+
+        };
+
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+    }
+    private void loadListFood() {
+        cart=new Database(this).getCarts();
+        adapter=new CartAdapter(cart,this);
+        recyclerView.setAdapter(adapter);
+
+        //calculate total price
+        int total=0;
+        try {
+            for (Order order : cart) {
+                total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
+            }
+        }catch (Exception e){}
+        Locale locale =new Locale("en","US");
+        NumberFormat fmt=NumberFormat.getCurrencyInstance(locale);
+
+        txtTotalPrice.setText(fmt.format(total));
+
+    }
+
+    @Override
+    public void onResponse(String response) {
+
+        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+
+    }
+
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle().equals(Common.DELETE))
+        {
+            deleteCart(item.getOrder());
+        }
+
+
+        return true;
+    }
+
+
+    private void deleteCart(int position) {
+        String nameFoodDelete=cart.get(position).getProductName();
+        //we will remove item at List<Order> by Position
+        cart.remove(position);
+        adapter.notifyItemRemoved(position);
+        adapter.notifyItemRangeChanged(position,cart.size());
+        Snackbar.make(rootLayout,"the Food : "+nameFoodDelete+" was deleted", Snackbar.LENGTH_SHORT).show();
+        //After that ,we will delete all old data from SQLite
+        new Database(this).cleanCart();
+        //And final ,we will update new data from List<Order> to SQlite
+        for (Order item:cart) {
+            new Database(this).addToCart(item);
+        }
+
+
+    }
+}

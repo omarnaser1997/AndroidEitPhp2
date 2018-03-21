@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipe_layout"
+    tools:context="com.naser.omar.androideitserverphp.FoodList">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <com.mancj.materialsearchbar.MaterialSearchBar
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:padding="4dp"
+        app:mt_hint=" Enter your food"
+        app:mt_speechMode="false" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/uploadeFood"
+        android:onClick="uploadfood"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_exit_to_app_black_24dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_food"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchBar"
+        android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_Foood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            style="?android:attr/progressBarStyleLarge"
+            />
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>
