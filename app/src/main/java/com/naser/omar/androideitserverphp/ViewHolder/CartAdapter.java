@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
@@ -98,7 +99,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartviewHolder> {
 
                 Order order = listData.get(position);
                 order.setQuantity(String.valueOf(newValue));
-                new Database(cart).updateCart(order);
+               try{ new Database(cart).updateCart(order);}catch (Exception e){
+                   Toast.makeText(cart, e.getMessage(), Toast.LENGTH_SHORT).show();
+               }
 
 
                 //Update txtTOTAl

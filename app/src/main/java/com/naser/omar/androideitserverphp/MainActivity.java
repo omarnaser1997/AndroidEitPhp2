@@ -110,13 +110,14 @@ public class MainActivity extends AppCompatActivity {
         {
             if (!user.isEmpty() && !pwd.isEmpty())
             {
+                try{
                 if(new Database(getBaseContext()).getUser()!=null) {
                     //login(user,pwd);
                     Intent homeintent = new Intent(MainActivity.this, Home.class);
                     Common.currentUser = new Database(getBaseContext()).getUser().get(0);
                     startActivity(homeintent);
                     finish();
-                }
+                }}catch (Exception e){}
             }
         }
     }

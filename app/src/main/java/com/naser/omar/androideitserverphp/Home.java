@@ -180,9 +180,9 @@ public class Home extends AppCompatActivity
 
 
 
-
-        Picasso.with(this).load(new Database(getApplicationContext()).getUser().get(0).getImage()).into(drawerImage);
-
+try {
+    Picasso.with(this).load(new Database(getApplicationContext()).getUser().get(0).getImage()).into(drawerImage);
+}catch (Exception e){}
         //Load menu
         // recycler_menu=(ListView) findViewById(R.id.recycler_menu);
         // recycler_menu.setHasFixedSize(true);

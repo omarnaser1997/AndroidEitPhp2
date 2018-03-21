@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,27 +8,34 @@
     tools:context="com.naser.omar.androideitserverphp.MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59000003">
 
         <ImageView
-            app:srcCompat="@drawable/logo_eat_it"
             android:id="@+id/imageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            />
+            app:srcCompat="@drawable/logo_eat_it" />
 
         <TextView
-            android:gravity="center"
             android:id="@+id/txtSlogan"
-            android:text="@string/slogan"
-            android:textColor="@color/white"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            />
+            android:gravity="center"
+            android:text="@string/slogan"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -38,19 +45,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <!--<Button-->
         <!--android:id="@+id/btnSingnUp"-->
@@ -89,22 +104,21 @@
         <!--/>-->
 
 
-
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignIn"
-            android:text="SingnIn"
-            android:onClick="Singin"
-            android:textColor="@color/btnSignUp"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_weight="1"
             android:background="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:onClick="Singin"
+            android:text="SingnIn"
+            android:textColor="@color/btnSignUp"
             app:buttonColor="@color/fbutton_color_midnight_blue"
             app:shadowColor="@android:color/black"
 
             />
     </LinearLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
