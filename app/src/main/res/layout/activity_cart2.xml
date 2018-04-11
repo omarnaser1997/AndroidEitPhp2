@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Total: "
+                    android:text="@string/Total"
                     android:textSize="20sp"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
 
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnPlaceOrder"
-                android:text="Place Order"
+                android:text="@string/Place_Order"
                 android:textColor="@android:color/white"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"

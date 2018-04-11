@@ -231,7 +231,7 @@ public class FoodAdapter  extends RecyclerView.Adapter<FoodAdapter.myViewHolder>
             }
         });
 
-
+        //عند الضغط على زر المشاركة
         holder.share_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

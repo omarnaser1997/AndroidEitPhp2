@@ -151,7 +151,7 @@ public class OrderStatus extends AppCompatActivity {
                 },     new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
             }
         }){
 
@@ -168,19 +168,19 @@ public class OrderStatus extends AppCompatActivity {
 
     private void showUpdateDialog(final int item) {
         final AlertDialog.Builder alertDialog=new AlertDialog.Builder(OrderStatus.this);
-        alertDialog.setTitle("Update Order");
-        alertDialog.setMessage("Please choose status");
+        alertDialog.setTitle(getString(R.string.Update_Order));
+        alertDialog.setMessage(getString(R.string.Please_choose_status));
 
         LayoutInflater inflater=this.getLayoutInflater();
         final View view=inflater.inflate(R.layout.update_order_layout,null);
 
         spinner=(MaterialSpinner)view.findViewById(R.id.statusSpinner);
-        spinner.setItems("Placed","On my way","Shipped");
+        spinner.setItems(getString(R.string.Placed),getString(R.string.On_my_way),getString(R.string.Shipped));
 
         alertDialog.setView(view);
 
        // final String localKey=key;
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -212,14 +212,14 @@ public class OrderStatus extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Snackbar.make(rootLayout,"Okkkk", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(rootLayout,getString(R.string.ok), Snackbar.LENGTH_LONG).show();
                        // Toast.makeText(OrderStatus.this, requests.get(item).getStatus().toString(), Toast.LENGTH_SHORT).show();
                         loadOrders(Common.currentUser.getNumber());
                     }
                 },     new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
             }
         }){
 
@@ -252,7 +252,7 @@ public class OrderStatus extends AppCompatActivity {
                 },     new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
             }
         }){
 

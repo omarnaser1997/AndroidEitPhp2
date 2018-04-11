@@ -256,7 +256,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
             }
             else
             {
-                Toast.makeText(this, "this device is not support", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.this_device_is_not_support), Toast.LENGTH_SHORT).show();
                 finish();
             }
             return false;
@@ -339,7 +339,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mDialog.setMessage("Please wating...");
+            mDialog.setMessage(getString(R.string.please_waiting));
           try{  mDialog.show();}catch (Exception e){}finally {}
 
         }

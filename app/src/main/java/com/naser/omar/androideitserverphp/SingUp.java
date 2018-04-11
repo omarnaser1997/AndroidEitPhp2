@@ -44,7 +44,7 @@ public class SingUp extends AppCompatActivity {
                 if(Common.isConnectedToInternet(getBaseContext())) {
 
                     final ProgressDialog mDialog = new ProgressDialog(SingUp.this);
-                    mDialog.setMessage("please waiting ...");
+                    mDialog.setMessage(getString(R.string.please_waiting));
                     mDialog.show();
 
 
@@ -62,7 +62,7 @@ public class SingUp extends AppCompatActivity {
                                     } else {
                                         mDialog.dismiss();
                                         // user=new User(edtName.getText().toString(),edtPassword.getText().toString(),edtPhone.getText().toString());
-                                        Toast.makeText(SingUp.this, "Sing up successfuly !", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SingUp.this, getString(R.string.Sing_up_successfuly), Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
 
@@ -74,7 +74,7 @@ public class SingUp extends AppCompatActivity {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     mDialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), " Please make sure you are connected to the network", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), getString(R.string.Please_make_sure_you_are_connected_to_the_network), Toast.LENGTH_LONG).show();
 
                                 }
                             }) {
@@ -91,7 +91,7 @@ public class SingUp extends AppCompatActivity {
                     MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
                 }else {
-                    Toast.makeText(SingUp.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SingUp.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
                     return;
                 }
 

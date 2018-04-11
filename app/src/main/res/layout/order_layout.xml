@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
-                android:text="Status"
+                android:text="@string/Status"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
-                android:text="Address"
+                android:text="@string/Address"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
         </LinearLayout>

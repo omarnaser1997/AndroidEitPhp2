@@ -20,7 +20,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/phoneNumber"
-            android:hint="Phone Numer "
+            android:hint="@string/Phone_Number"
             android:inputType="phone"
             android:text=""
             android:textColor="@color/colorPrimary"

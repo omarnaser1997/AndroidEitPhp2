@@ -37,7 +37,7 @@
                     android:gravity="center_vertical|start"
                     android:textAllCaps="true"
                     android:textStyle="bold"
-                    android:text="Order ID"
+                    android:text="@string/Order_ID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -47,7 +47,7 @@
                     android:gravity="center_vertical|start"
                     android:textAllCaps="true"
                     android:textStyle="italic"
-                    android:text="Order Phone"
+                    android:text="@string/Order_Phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -65,7 +65,7 @@
                     android:gravity="center_vertical|start"
                     android:textAllCaps="true"
                     android:textStyle="italic"
-                    android:text="Address"
+                    android:text="@string/Address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -76,7 +76,7 @@
                     android:gravity="center_vertical|start"
                     android:textAllCaps="true"
                     android:textStyle="italic"
-                    android:text="Comment"
+                    android:text="@string/Comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -98,7 +98,7 @@
 
 
         <TextView
-            android:text="Detail"
+            android:text="@string/Detail"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:layout_marginBottom="20dp"

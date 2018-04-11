@@ -17,7 +17,7 @@
 
           <com.rengwuxian.materialedittext.MaterialEditText
               android:id="@+id/edtAddress"
-              android:hint="Address"
+              android:hint="@string/Address"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:textColorHint="@color/colorPrimary"
@@ -32,7 +32,7 @@
               />
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtComment"
-                android:hint="Comment"
+                android:hint="@string/Comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/colorPrimary"

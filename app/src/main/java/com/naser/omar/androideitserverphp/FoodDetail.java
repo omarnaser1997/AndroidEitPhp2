@@ -158,7 +158,7 @@ public class FoodDetail extends AppCompatActivity implements
                     getRatingFood(foodId);
 
                  }else {
-                        Toast.makeText(FoodDetail.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodDetail.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
                           return;
                       }
         }
@@ -184,7 +184,7 @@ public class FoodDetail extends AppCompatActivity implements
                 String photoPath = galleryPhoto.getPath();
                 selectedPhoto=photoPath;
                 Log.d("3423432",selectedPhoto);
-                btnSelect.setText("Image selected !");
+                btnSelect.setText(getString(R.string.Image_selected));
                 btnSelectBool=true;
 
             }
@@ -194,7 +194,7 @@ public class FoodDetail extends AppCompatActivity implements
 
     private void getRatingFood(final String foodId) {
         final ProgressDialog mDialog = new ProgressDialog(FoodDetail.this);
-        mDialog.setMessage("please waiting ...");
+        mDialog.setMessage(getString(R.string.please_waiting));
         mDialog.show();
 
 
@@ -225,7 +225,7 @@ public class FoodDetail extends AppCompatActivity implements
             @Override
             public void onErrorResponse(VolleyError error) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext()," Please make sure you are connected to the network",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string. Please_make_sure_you_are_connected_to_the_network),Toast.LENGTH_LONG).show();
 
             }
         }){
@@ -253,8 +253,8 @@ public class FoodDetail extends AppCompatActivity implements
         final   String PriceFood=currentFood.getPrice();
 
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(FoodDetail.this);
-        alertDialog.setTitle("Edit Food");
-        alertDialog.setMessage("Please fill full information");
+        alertDialog.setTitle(getString(R.string.Edit_Food));
+        alertDialog.setMessage(getString(R.string.Please_fill_full_information));
 
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout =inflater.inflate(R.layout.add_new_food_layout,null);
@@ -297,7 +297,7 @@ public class FoodDetail extends AppCompatActivity implements
         alertDialog.setView(add_menu_layout);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
         //set button
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -324,7 +324,7 @@ public class FoodDetail extends AppCompatActivity implements
 
         ///////////////////////////////////////
         final ProgressDialog mDialog =new ProgressDialog(this);
-        mDialog.setMessage("Uploading ...");
+        mDialog.setMessage(getString(R.string.Uploading));
         mDialog.show();
         //////////////////////////////////////
 
@@ -364,27 +364,27 @@ public class FoodDetail extends AppCompatActivity implements
             @Override
             public void handleIOException(IOException e) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Cannot Connect to Server",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Cannot_Connect_to_Server),Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void handleMalformedURLException(MalformedURLException e) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"URL Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.URL_Error),Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void handleProtocolException(ProtocolException e) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Protocol Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Protocol_Error),Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void handleUnsupportedEncodingException(UnsupportedEncodingException e) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Encodnig Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Encodnig_Error),Toast.LENGTH_LONG).show();
 
 
             }
@@ -400,15 +400,15 @@ public class FoodDetail extends AppCompatActivity implements
 
     private void showRatingDialog() {
         new AppRatingDialog.Builder()
-                .setPositiveButtonText("submit")
-                .setNegativeButtonText("Cancel")
+                .setPositiveButtonText(getString(R.string.submit))
+            .setNegativeButtonText(getString(R.string.CANCEL))
                 .setNoteDescriptions(Arrays.asList("Very Bad","Not Good","Quite Ok","Very Good","Excellent"))
                 .setDefaultRating(1)
-                .setTitle("Rete this food")
-                .setDescription("please select some stars and give your feedback")
+                .setTitle(getString(R.string.Rete_this_food))
+                .setDescription(getString(R.string.please_select_some_stars_and_give_your_feedback))
                 .setTitleTextColor(R.color.colorPrimary)
                 .setDescriptionTextColor(R.color.colorPrimary)
-                .setHint("please write your comment here....")
+                .setHint(getString(R.string.please_write_your_comment_here))
                 .setHintTextColor(R.color.colorAccent)
                 .setCommentTextColor(android.R.color.white)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
@@ -424,7 +424,7 @@ public class FoodDetail extends AppCompatActivity implements
         StringRequest stringRequest=new StringRequest(Request.Method.POST, "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/FoodDetail.php", (Response.Listener<String>) this, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
 
             }
         }){
@@ -476,7 +476,7 @@ public class FoodDetail extends AppCompatActivity implements
                 comments);
 
         final ProgressDialog mDialog = new ProgressDialog(FoodDetail.this);
-        mDialog.setMessage("please waiting ...");
+        mDialog.setMessage(getString(R.string.please_waiting));
         mDialog.show();
 
 
@@ -487,14 +487,14 @@ public class FoodDetail extends AppCompatActivity implements
                     @Override
                     public void onResponse(String response) {
                         mDialog.dismiss();
-                        Toast.makeText(FoodDetail.this, "Thank you for submit rating  !!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodDetail.this, getString(R.string.Thank_you_for_submit_rating), Toast.LENGTH_SHORT).show();
 
                     }
                 },     new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext()," Please make sure you are connected to the network",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Please_make_sure_you_are_connected_to_the_network),Toast.LENGTH_LONG).show();
 
             }
         }){

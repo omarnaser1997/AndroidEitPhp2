@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidEitServer</string>
+    <string name="slogan">نقوم بنقل المنتجات إلى العملاء بالسرعة التي يخون فيها شخصيتك</string>
+    <string name="title_activity_home">الصفحة الرئيسية</string>
+
+    <string name="navigation_drawer_open">افتح درج التنقل</string>
+    <string name="navigation_drawer_close">إغلاق درج التنقل</string>
+
+    <string name="action_settings">إعدادات</string>
+    <string name="title_activity_tracking_order">TrackingOrder</string>
+    <string name="forgot_pwd"><u>هل نسيت كلمة المرور؟</u></string>
+
+    <string name="facebook_app_id">183920575669167</string>
+    <string name="facebook_login_protocol_name">fb183920575669167</string>
+
+
+    <string name="please_waiting">الرجاء الانتظار ...</string>
+    <string name="Forgot_Password">هل نسيت كلمة المرور</string>
+    <string name="Enter_your_secure_code">أدخل رمزك الآمن</string>
+
+
+
+    <string name="please_check_your_connection">يرجى التحقق من اتصالك!</string>
+    <string name="Please_make_sure_you_are_connected_to_the_network">يرجى التأكد من اتصالك بالشبكة</string>
+    <string name="Welcome">أهلا بك</string>
+    <string name="Please_Enter_Phone_number">يرجى إدخال رقم الهاتف !</string>
+    <string name="ok">حسنا !</string>
+    <string name="CANCEL">إلغاء</string>
+    <string name="Your_cart_is_empty">عربة التسوق فارغة !!!</string>
+    <string name="One_more_step">خطوة أخرى أيضا !</string>
+    <string name="Enter_your_address">أدخل عنوانك:</string>
+    <string name="YES">نعم</string>
+    <string name="Thank_you_Order_Place">شكرا لك ، مكان الطلب</string>
+    <string name="No">لا</string>
+    <string name="Error_while_reading_data">خطأ أثناء قراءة البيانات</string>
+    <string name="the_Food">الطعام :</string>
+    <string name="was_deleted">تم حذفه </string>
+    <string name="Image_selected">الصورة المحددة !</string>
+    <string name="Edit_Food">تحرير الغذاء</string>
+    <string name="Please_fill_full_information">Please fill full information</string>
+    <string name="Uploading">جارٍ التحميل ...</string>
+    <string name="Cannot_Connect_to_Server">لا يمكن الاتصال بالسيرفر</string>
+    <string name="URL_Error">خطأ في عنوان URL</string>
+    <string name="Protocol_Error">خطأ في البروتوكول</string>
+    <string name="Encodnig_Error">خطأ ترميز</string>
+    <string name="submit">موافق</string>
+    <string name="Rete_this_food">قيم هذا الطعام</string>
+    <string name="please_select_some_stars_and_give_your_feedback">يرجى اختيار بعض النجوم وتقديم ملاحظاتك</string>
+    <string name="please_write_your_comment_here">رجاء اكتب تعليقك هنا....</string>
+    <string name="Thank_you_for_submit_rating">شكرا لتقديم التقييم !</string>
+    <string name="Enter_your_food">أدخل طعامك</string>
+
+    <string name="End_of_list">نهاية القائمة</string>
+
+    <string name="was_deledted">تم حذفه </string>
+    <string name="Menu">القائمة</string>
+    <string name="menu"> قائمةالطعام</string>
+
+    <string name="Add_new_Category">إضافة فئة جديدة</string>
+    <string name="New_category">New category</string>
+    <string name="was_added">فئة جديدة</string>
+
+    <string name="SELECTED">المحدد</string>
+
+    <string name="CHANGE_PASSWORD">تغيير كلمة السر</string>
+    <string name="Please_fill_all_information">يرجى ملء جميع المعلومات</string>
+
+    <string name="New_password_doesnot_match">كلمة المرور الجديدة غير متطابقة</string>
+
+    <string name="wrong_old_password">كلمة مرور قديمة خاطئة</string>
+
+    <string name="Update_Category">تحديث الفئة</string>
+
+    <string name="Wrong_password">كلمة مرور خاطئة !!!</string>
+
+    <string name="User_not_exist_in_Database">المستخدم غير موجود في قاعدة البيانات</string>
+    <string name="Update_Order">تحديث الطلب</string>
+
+    <string name="Please_choose_status">يرجى اختيار الحالة</string>
+    <string name="Placed">وضعت</string>
+    <string name="On_my_way">انا في طريقي</string>
+
+    <string name="Shipped">شحنها</string>
+
+
+    <string name="your_password">كلمة السر خاصتك :</string>
+
+
+    <string name="wrong_secure_code">خطأ رمز آمن !</string>
+
+    <string name="Sing_up_successfuly">تم تسجيل الدخول بنجاح !</string>
+
+
+    <string name="this_device_is_not_support">هذا الجهاز لا يدعم</string>
+
+    <string name="Select_the_action">حدد الإجراء</string>
+
+    <string name="Total">المجموع : </string>
+    <string name="Place_Order">مكان الطلب</string>
+
+    <string name="FoodName">اسم الغذاء</string>
+
+    <string name="Description"> وصف </string>
+    <string name="SingnUp"> سجل </string>
+
+    <string name="SingnIn"> تسجيل الدخول</string>
+    <string name="Order_ID">رقم الطلب</string>
+    <string name="Order_Phone">اطلب الهاتف</string>
+
+    <string name="Address">عنوان</string>
+
+    <string name="Comment">تعليق</string>
+    <string name="Detail">التفاصيل</string>
+
+    <string name="Remember_me">تذكرنى</string>
+
+    <string name="Singn_In">تسجيل الدخول</string>
+
+
+
+    <string name="Name">الاسم</string>
+    <string name="Password">كلمه السر</string>
+    <string name="Phone_Number">رقم الهاتف</string>
+    <string name="Secure_Code">رمز آمن</string>
+    <string name="Sign_Up">سجل</string>
+
+    <string name="Price">السعر</string>
+    <string name="Dicounts">التخفيضات</string>
+    <string name="SELECT">تحديد</string>
+
+    <string name="UPLOAD">تحميل</string>
+
+
+    <string name="Food_01">الغذاء 01</string>
+
+
+    <string name="New_Password">كلمة السر الجديدة</string>
+
+
+    <string name="Repeat_Password">اعد كلمة السر</string>
+    <string name="Name_of_food">اسم الطعام</string>
+
+
+    <string name="Back">رجوع</string>
+
+    <string name="Delete">حذف</string>
+
+    <string name="updata">تحديث</string>
+    <string name="Name_of_Menu">اسم القائمة</string>
+    <string name="Product_Name">اسم المنتج</string>
+    <string name="Product_Quantity">كمية المنتج</string>
+
+    <string name="product_price">سعر المنتج</string>
+
+    <string name="Product_Discount">خصم المنتج</string>
+
+    <string name="Status">الحالة</string>
+
+    <string name="cart">عربة التسوق</string>
+
+    <string name="orders">أوامر</string>
+
+    <string name="Change_password">تغيير كلمة السر</string>
+    <string name="password">كلمة السر</string>
+
+    <string name="Sign_out">خروج</string>
+    <string name="Refresh">تحديث</string>
+
+
+
+
+</resources>

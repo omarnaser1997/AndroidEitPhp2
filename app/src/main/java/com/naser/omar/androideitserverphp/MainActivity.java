@@ -29,6 +29,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -57,11 +58,14 @@ import java.util.Map;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
 
-public class MainActivity extends AppCompatActivity {
+
+
+public class MainActivity extends AppCompatActivity{
     Button btnSingin;
     TextView txtslogan;
     LoginButton login_button;
     CallbackManager callbackManager;
+    private static final int REQUEST_CODE =7171 ;
 
 
     @Override
@@ -117,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
                     Common.currentUser = new Database(getBaseContext()).getUser().get(0);
                     startActivity(homeintent);
                     finish();
-                }}catch (Exception e){}
+                }}catch (Exception e){
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -131,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         if (Common.isConnectedToInternet(getBaseContext())) {
 
             final ProgressDialog mDialog = new ProgressDialog(MainActivity.this);
-            mDialog.setMessage("please waiting ...");
+            mDialog.setMessage(getString(R.string.please_waiting));
             mDialog.show();
 
 
@@ -156,12 +162,12 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(homeintent);
                                     finish();
                                 }else {
-                                    Toast.makeText(MainActivity.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, getString(R.string.Wrong_password), Toast.LENGTH_SHORT).show();
                                 }
                             }else
                             {
                                 mDialog.dismiss();
-                                Toast.makeText(MainActivity.this, "User not exist in Database", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, getString(R.string.User_not_exist_in_Database), Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -170,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     mDialog.dismiss();
-                    Toast.makeText(getApplicationContext()," Please make sure you are connected to the network",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.Please_make_sure_you_are_connected_to_the_network),Toast.LENGTH_LONG).show();
 
                 }
             }){
@@ -189,15 +195,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         }else {
-            Toast.makeText(MainActivity.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
             return;
         }
 
     }
 
     public void Singin(View view) {
-        Intent Singin =new Intent(this,SingIn.class);
-        startActivity(Singin);
+//        Intent Singin =new Intent(this,SingIn.class);
+//    startActivity(Singin);
+        startLoginSystem();
     }
 
     public void Singup(View view) {
@@ -299,6 +306,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void startLoginSystem() {
+
+//        Intent intent =new Intent(MainActivity.this, AccountKitActivity.class);
+//        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder=
+//                new AccountKitConfiguration.AccountKitConfigurationBuilder(LoginType.PHONE,
+//                        AccountKitActivity.ResponseType.TOKEN);
+//        intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,configurationBuilder.build());
+//        startActivityForResult(intent,REQUEST_CODE);
+
+
+    }
+
     private void setDataInDBserver(final String name, final String password, final String phone, final String image) {
 
         String Url = "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/singwithfacebook.php";
@@ -335,7 +354,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(getApplicationContext(), " Please make sure you are connected to the network", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.Please_make_sure_you_are_connected_to_the_network), Toast.LENGTH_LONG).show();
 
                     }
                 }) {
@@ -392,8 +411,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showPhoneNumberDialog(final String name , final String image) {
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(MainActivity.this);
-        alertDialog.setTitle("Welcome "+name);
-        alertDialog.setMessage("Please Enter Phone number !");
+        alertDialog.setTitle(getString(R.string.Welcome)+name);
+        alertDialog.setMessage(getString(R.string.Please_Enter_Phone_number));
 
         LayoutInflater inflater =LayoutInflater.from(this);
         View layout_pwd =inflater.inflate(R.layout.setphonenumber,null);
@@ -405,7 +424,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Butoon
-        alertDialog.setPositiveButton("Oky !", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -424,7 +443,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(getString(R.string.CANCEL), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

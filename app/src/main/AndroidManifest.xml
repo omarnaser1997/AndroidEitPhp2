@@ -28,11 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
-        <meta-data  android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
-
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -71,12 +69,14 @@
         <activity
             android:name=".TrackingOrder"
             android:label="@string/title_activity_tracking_order" />
-        <activity android:name=".OrderDetail"></activity>
+        <activity android:name=".OrderDetail" />
 
         <provider
-            android:authorities="com.facebook.app.FacebookContentProvider183920575669167"
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:authorities="com.facebook.app.FacebookContentProvider183920575669167"
+            android:exported="true" />
+
+        <activity android:name=".TESTMainActivitye"></activity>
     </application>
 
 </manifest>

@@ -25,7 +25,7 @@
             android:background="@color/colorPrimary"
             android:backgroundTint="@color/btnSignUp"
 
-            android:text="Back"
+            android:text="@string/Back"
             android:textColor="@android:color/white"
             app:buttonColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Delete"
+            android:text="@string/Delete"
             android:textColor="@color/color_black"
             android:textSize="20dp" />
 
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="updata"
+            android:text="@string/updata"
             android:textColor="@color/color_black"
             android:textSize="20dp" />
     </LinearLayout>

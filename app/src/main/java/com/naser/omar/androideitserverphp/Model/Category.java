@@ -13,6 +13,8 @@ public class Category {
     private String Image;
     @SerializedName("categoryID")
     private String categoryID;
+    @SerializedName("base64")
+    private String base64;
 
     public void setCategoryID(String categoryID) {
         this.categoryID = categoryID;
@@ -26,19 +28,16 @@ public class Category {
         this.base64 = base64;
     }
 
-    @SerializedName("base64")
-    private String base64;
+
 
     public Category() {
     }
 
-    public Category(String name, String image,String CategoryID) {
+    public Category(String name, String categoryID, String base64) {
         Name = name;
-        Image = image;
-        categoryID=CategoryID;
+        this.categoryID = categoryID;
+        this.base64 = base64;
     }
-
-
 
     public void setName(String name) {
         Name = name;

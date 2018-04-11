@@ -69,7 +69,7 @@ public class Cart extends AppCompatActivity implements Response.Listener<String>
                 if (cart.size() >0) {
                     ShowAlertDialog();
                 }else {
-                    Toast.makeText(Cart.this, "Your cart is empty !!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Cart.this, getString(R.string.Your_cart_is_empty), Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -83,8 +83,8 @@ public class Cart extends AppCompatActivity implements Response.Listener<String>
     private void ShowAlertDialog(){
 
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(Cart.this);
-        alertDialog.setTitle("One more step!");
-        alertDialog.setMessage("Enter your address:");
+        alertDialog.setTitle(getString(R.string.One_more_step));
+        alertDialog.setMessage(getString(R.string.Enter_your_address));
 
         LayoutInflater inflater =this.getLayoutInflater();
         View order_address_comment=inflater.inflate(R.layout.order_address_comment,null);
@@ -94,7 +94,7 @@ public class Cart extends AppCompatActivity implements Response.Listener<String>
         alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
-        alertDialog.setPositiveButton("YES",new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getString(R.string.YES),new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -113,13 +113,13 @@ public class Cart extends AppCompatActivity implements Response.Listener<String>
 
                 //Delete cart
                 new Database(getBaseContext()).cleanCart();
-                Toast.makeText(Cart.this, "Thank you , Order Place", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Cart.this, getString(R.string.Thank_you_Order_Place), Toast.LENGTH_SHORT).show();
                 finish();
 
             }
         });
 
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -133,7 +133,7 @@ public class Cart extends AppCompatActivity implements Response.Listener<String>
         StringRequest stringRequest=new StringRequest(com.android.volley.Request.Method.POST, "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/SetRequest.php", (Response.Listener<String>) this, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
 
             }
         }){
@@ -210,7 +210,7 @@ public class Cart extends AppCompatActivity implements Response.Listener<String>
         cart.remove(position);
         adapter.notifyItemRemoved(position);
         adapter.notifyItemRangeChanged(position,cart.size());
-        Snackbar.make(rootLayout,"the Food : "+nameFoodDelete+" was deleted", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(rootLayout,getString(R.string.the_Food)+nameFoodDelete+getString(R.string.was_deleted), Snackbar.LENGTH_SHORT).show();
         //After that ,we will delete all old data from SQLite
         new Database(this).cleanCart();
         //And final ,we will update new data from List<Order> to SQlite

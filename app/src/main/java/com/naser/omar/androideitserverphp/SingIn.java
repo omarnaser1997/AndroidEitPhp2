@@ -73,8 +73,8 @@ public class SingIn extends AppCompatActivity {
 
     private void showForgotpwdDialog() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setTitle("Forgot Password");
-        builder.setMessage("Enter your secure code");
+        builder.setTitle(getString(R.string.Forgot_Password));
+        builder.setMessage(getString(R.string.Enter_your_secure_code));
 
         LayoutInflater inflater=this.getLayoutInflater();
         View forgot_view=inflater.inflate(R.layout.forgot_password_layout,null);
@@ -86,7 +86,7 @@ public class SingIn extends AppCompatActivity {
         final MaterialEditText edtSecureCode =(MaterialEditText)forgot_view.findViewById(R.id.edtSecureCode);
 
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Check if User available
@@ -94,7 +94,7 @@ public class SingIn extends AppCompatActivity {
 
 
                 final ProgressDialog mDialog = new ProgressDialog(SingIn.this);
-                mDialog.setMessage("please waiting ...");
+                mDialog.setMessage(getString(R.string.please_waiting));
                 mDialog.show();
 
 
@@ -119,9 +119,9 @@ public class SingIn extends AppCompatActivity {
                                    // Toast.makeText(SingIn.this, user.getSecureCode(), Toast.LENGTH_SHORT).show();
 
                                     if (user.getSecureCode().equals(edtSecureCode.getText().toString())) {
-                                        Toast.makeText(SingIn.this, "your password : " + user.getPassword(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SingIn.this, getString(R.string.your_password) + user.getPassword(), Toast.LENGTH_LONG).show();
                                     } else {
-                                        Toast.makeText(SingIn.this, "wrong secure code !!!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SingIn.this, getString(R.string.wrong_secure_code), Toast.LENGTH_LONG).show();
 
                                    }
                                 }
@@ -132,7 +132,7 @@ public class SingIn extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mDialog.dismiss();
-                        Toast.makeText(getApplicationContext()," Please make sure you are connected to the network",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),getString(R.string.Please_make_sure_you_are_connected_to_the_network),Toast.LENGTH_LONG).show();
 
                     }
                 }){
@@ -150,7 +150,7 @@ public class SingIn extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.No), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //when you press th No button , the application exits from  AlertDialog
@@ -172,7 +172,7 @@ public class SingIn extends AppCompatActivity {
 
 
         final ProgressDialog mDialog = new ProgressDialog(SingIn.this);
-        mDialog.setMessage("please waiting ...");
+        mDialog.setMessage(getString(R.string.please_waiting));
         mDialog.show();
 
         String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/SingIn.php";
@@ -198,16 +198,16 @@ public class SingIn extends AppCompatActivity {
                                 startActivity(homeintent);
                                 finish();
                             } else {
-                                Toast.makeText(SingIn.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SingIn.this, getString(R.string.Wrong_password), Toast.LENGTH_SHORT).show();
                             }
                         }catch (Exception e) {
-                                Toast.makeText(SingIn.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SingIn.this, getString(R.string.Wrong_password), Toast.LENGTH_SHORT).show();
 
                             }
                         }else
                         {
                             mDialog.dismiss();
-                            Toast.makeText(SingIn.this, "User not exist in Database", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SingIn.this, getString(R.string.User_not_exist_in_Database), Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -216,7 +216,7 @@ public class SingIn extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 mDialog.dismiss();
-                Toast.makeText(getApplicationContext()," Please make sure you are connected to the network",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Please_make_sure_you_are_connected_to_the_network),Toast.LENGTH_LONG).show();
 
             }
                                                     }){
@@ -232,7 +232,7 @@ public class SingIn extends AppCompatActivity {
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
         }else {
-            Toast.makeText(SingIn.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SingIn.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
             return;
         }
 

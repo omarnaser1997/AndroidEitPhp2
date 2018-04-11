@@ -86,7 +86,7 @@
             android:background="@color/btnSignUp"
             android:backgroundTint="@color/btnSignUp"
             android:onClick="Singup"
-            android:text="SingnUp"
+            android:text="@string/SingnUp"
             android:textColor="@android:color/white"
             app:buttonColor="@color/btnSignUp"
             app:shadowColor="@android:color/black" />
@@ -113,7 +113,7 @@
             android:background="@android:color/white"
             android:backgroundTint="@android:color/white"
             android:onClick="Singin"
-            android:text="SingnIn"
+            android:text="@string/SingnIn"
             android:textColor="@color/btnSignUp"
             app:buttonColor="@color/fbutton_color_midnight_blue"
             app:shadowColor="@android:color/black"

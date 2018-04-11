@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
+import com.naser.omar.androideitserverphp.Model.Category;
+import com.naser.omar.androideitserverphp.Model.Image64;
 import com.naser.omar.androideitserverphp.Model.Order;
 import com.naser.omar.androideitserverphp.Model.User;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -187,4 +189,59 @@ public class Database extends SQLiteAssetHelper{
         String query = String.format("UPDATE OrderDetail SET Quantity=%s WHERE ID = %d",order.getQuantity(),order.getID());
         db.execSQL(query);
     }
+
+
+    //////////////////////////////////////////////////////////////////////////
+
+    public void addToImage(Image64 image64) {
+        SQLiteDatabase db=getReadableDatabase();
+        String query=String.format("INSERT INTO Image(Name,Image64bit,ID) VALUES ('%s','%s','%s');",
+
+                image64.getName(),
+                image64.getImage64bit(),
+                image64.getId());
+
+        db.execSQL(query);
+    }
+
+
+    public List<Image64> getImage64(){
+
+        SQLiteDatabase db=getReadableDatabase();
+        SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
+
+        //name Fields in the Table
+        String[] sqlSelect={"Name","Image64bit","ID"};
+        //name Table
+        String sqlTable="Image";
+
+        qb.setTables(sqlTable);
+        Cursor c=qb.query(db,sqlSelect,null,null,null,null,null);
+        final List<Image64> result=new ArrayList<>();
+        if(c.moveToFirst()){
+
+            do{
+                result.add(new Image64 (
+                        c.getString(c.getColumnIndex("Name")),
+                        c.getString(c.getColumnIndex("Image64bit")),
+                        c.getString(c.getColumnIndex("ID"))
+
+                ));
+
+            }while (c.moveToNext());
+        }
+
+        return  result;
+    }
+
+    public void deleteAllformImage(){
+        SQLiteDatabase db=getReadableDatabase();
+        String query =String.format("DELETE  FROM Image");
+        db.execSQL(query);
+
+    }
+
+
+
+
 }

@@ -13,4 +13,156 @@
     <string name="facebook_app_id">183920575669167</string>
     <string name="facebook_login_protocol_name">fb183920575669167</string>
 
+
+    <string name="please_waiting">please waiting ...</string>
+    <string name="Forgot_Password">Forgot Password</string>
+    <string name="Enter_your_secure_code">Enter your secure code</string>
+
+
+    <string name="please_check_your_connection">please check your connection !!</string>
+    <string name="Please_make_sure_you_are_connected_to_the_network">Please make sure you are connected to the network</string>
+    <string name="Welcome">Welcome </string>
+    <string name="Please_Enter_Phone_number">Please Enter Phone number !</string>
+    <string name="ok">Oky !</string>
+    <string name="CANCEL">CANCEL</string>
+    <string name="Your_cart_is_empty">Your cart is empty !!!</string>
+    <string name="One_more_step">One more step!</string>
+    <string name="Enter_your_address">Enter your address:</string>
+    <string name="YES">YES</string>
+    <string name="Thank_you_Order_Place">Thank you , Order Place</string>
+    <string name="No">No</string>
+    <string name="Error_while_reading_data">Error while reading data</string>
+    <string name="the_Food">the Food :</string>
+    <string name="was_deleted"> was deleted</string>
+    <string name="Image_selected">Image selected !</string>
+    <string name="Edit_Food">Edit Food</string>
+    <string name="Please_fill_full_information">Please fill full information</string>
+    <string name="Uploading">Uploading ...</string>
+    <string name="Cannot_Connect_to_Server">Cannot Connect to Server</string>
+    <string name="URL_Error">URL Error</string>
+    <string name="Protocol_Error">Protocol Error</string>
+    <string name="Encodnig_Error">Encodnig Error</string>
+    <string name="submit">submit</string>
+    <string name="Rete_this_food">Rete this food</string>
+    <string name="please_select_some_stars_and_give_your_feedback">please select some stars and give your feedback</string>
+    <string name="please_write_your_comment_here">please write your comment here....</string>
+    <string name="Thank_you_for_submit_rating">Thank you for submit rating  !!!</string>
+    <string name="Enter_your_food">Enter your food</string>
+
+    <string name="End_of_list">End of list</string>
+
+    <string name="was_deledted"> was deledted</string>
+    <string name="Menu">Menu</string>
+
+
+    <string name="Add_new_Category">Add new Category</string>
+    <string name="New_category">New category</string>
+    <string name="was_added">was added</string>
+
+    <string name="SELECTED">SELECTED</string>
+
+    <string name="CHANGE_PASSWORD">CHANGE PASSWORD</string>
+    <string name="Please_fill_all_information">Please fill all information</string>
+
+    <string name="New_password_doesnot_match">New password doesnot match</string>
+
+    <string name="wrong_old_password">wrong old password</string>
+
+    <string name="Update_Category">Update Category</string>
+
+    <string name="Wrong_password">Wrong password !!!</string>
+
+    <string name="User_not_exist_in_Database">User not exist in Database</string>
+    <string name="Update_Order">Update Order</string>
+
+    <string name="Please_choose_status">Please choose status</string>
+    <string name="Placed">Placed</string>
+    <string name="On_my_way">On my way</string>
+
+    <string name="Shipped">Shipped</string>
+
+
+    <string name="your_password">your password : </string>
+
+
+    <string name="wrong_secure_code">wrong secure code !!!</string>
+
+    <string name="Sing_up_successfuly">Sing up successfuly !</string>
+
+
+    <string name="this_device_is_not_support">this device is not support</string>
+
+    <string name="Select_the_action">Select the action</string>
+
+    <string name="Total">Total: </string>
+    <string name="Place_Order">Place Order </string>
+
+    <string name="FoodName">FoodName</string>
+
+    <string name="Description"> Description</string>
+    <string name="SingnUp"> SingnUp</string>
+
+    <string name="SingnIn"> SingnIn</string>
+    <string name="Order_ID"> Order ID</string>
+    <string name="Order_Phone">Order Phone</string>
+
+    <string name="Address">Address</string>
+
+    <string name="Comment">Comment</string>
+    <string name="Detail">Detail</string>
+
+    <string name="Remember_me">Remember me</string>
+
+    <string name="Singn_In">Singn In</string>
+
+
+    <string name="Name">Name</string>
+    <string name="Password">Password</string>
+    <string name="Phone_Number">Phone Number</string>
+    <string name="Secure_Code">Secure Code</string>
+    <string name="Sign_Up">Sign Up</string>
+
+    <string name="Price">Price</string>
+    <string name="Dicounts">Dicounts</string>
+    <string name="SELECT">SELECT</string>
+
+    <string name="UPLOAD">UPLOAD</string>
+
+
+    <string name="Food_01">Food 01</string>
+
+
+    <string name="New_Password">New Password</string>
+
+
+    <string name="Repeat_Password">Repeat Password</string>
+    <string name="Name_of_food">Name of food</string>
+
+
+    <string name="Back">Back</string>
+
+    <string name="Delete">Delete</string>
+
+    <string name="updata">updata</string>
+    <string name="Name_of_Menu">Name of Menu</string>
+    <string name="Product_Name">Product Name</string>
+    <string name="Product_Quantity">Product Quantity</string>
+
+    <string name="product_price">product price</string>
+
+    <string name="Product_Discount">Product Discount</string>
+
+    <string name="Status">Status</string>
+
+    <string name="cart">cart</string>
+
+    <string name="orders">orders</string>
+
+    <string name="Change_password">Change password</string>
+
+    <string name="Sign_out">Sign out</string>
+    <string name="Refresh">Refresh</string>
+    <string name="menu">Menu</string>
+
+
 </resources>

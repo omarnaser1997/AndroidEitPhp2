@@ -6,5 +6,5 @@
         android:id="@+id/refresh"
         android:icon="@drawable/ic_refresh_black_24dp"
         android:iconTint="@android:color/white"
-        android:title="Refresh" />
+        android:title="@string/Refresh" />
 </menu>

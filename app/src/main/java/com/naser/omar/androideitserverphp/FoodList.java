@@ -190,7 +190,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
             public void onRefresh() {
 
                 userpage=2;
-                Toast.makeText(FoodList.this, ""+mAdapter.getSize(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FoodList.this, ""+mAdapter.getSize(), Toast.LENGTH_SHORT).show();
                 for (int i=0;i<mAdapter.getSize();i++) {
                     mAdapter.delete(i);
 
@@ -207,7 +207,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
 
                        loadListFood(categoryId,1);//تحميل قائمة الأطعمة الخاصة بالفئة المطلوبة
                     }else {
-                        Toast.makeText(FoodList.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodList.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -228,7 +228,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
                     if (Common.isConnectedToInternet(getBaseContext())){
                         loadListFood(categoryId,1);//تحميل قائمة الأطعمة الخاصة بالفئة المطلوبة
                     }else {
-                        Toast.makeText(FoodList.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodList.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -284,7 +284,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
 
         //Search
         materialSearchBar=(MaterialSearchBar)findViewById(R.id.searchBar);
-        materialSearchBar.setHint("Enter your food");//العنوان الظاهري لشريط البحث
+        materialSearchBar.setHint(getString(R.string.Enter_your_food));//العنوان الظاهري لشريط البحث
         //loadSuggest();//تحميل اقتراحات البحث
         materialSearchBar.setLastSuggestions(suggestList);//اضافة قائمة الاقتراحات لشريط البحث
         materialSearchBar.setCardViewElevation(10);
@@ -356,7 +356,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
                     if (Common.isConnectedToInternet(getBaseContext())) {
                         loadListFood(categoryId, userpage);//تحميل قائمة الأطعمة الخاصة بالفئة المطلوبة
                     } else {
-                        Toast.makeText(FoodList.this, "please check your connection !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodList.this, getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -411,7 +411,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         StringRequest stringRequest=new StringRequest(Request.Method.POST, "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/getFood.php", (Response.Listener<String>) this, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
 
             }
         }){
@@ -436,7 +436,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         StringRequest stringRequest=new StringRequest(Request.Method.POST, "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/DBClass/getFood.php", (Response.Listener<String>) this, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Error while reading data",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Error_while_reading_data),Toast.LENGTH_LONG).show();
 
             }
         }){
@@ -466,7 +466,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         //the list of page is fineshed
         if (response.contains("Array")){
             //when the page is fineshed i will hide last item in Recycler view
-            Toast.makeText(this, "End of list (^_^)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.End_of_list), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -760,8 +760,8 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         final   String PriceFood=productList.get(item).getPrice();
 
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(FoodList.this);
-        alertDialog.setTitle("Edit Food");
-        alertDialog.setMessage("Please fill full information");
+        alertDialog.setTitle(getString(R.string.Edit_Food));
+        alertDialog.setMessage(getString(R.string.Please_fill_full_information));
 
         LayoutInflater inflater =this.getLayoutInflater();
         View add_menu_layout =inflater.inflate(R.layout.add_new_food_layout,null);
@@ -804,7 +804,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         alertDialog.setView(add_menu_layout);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
         //set button
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -830,7 +830,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         productList.remove(item);
         mAdapter.notifyItemRemoved(item);
         mAdapter.notifyItemRangeChanged(item,productList.size());
-        Snackbar.make(swipeRefreshLayout,"the Food : "+nameFoodDelete+" was deledted", Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(swipeRefreshLayout,getString(R.string.the_Food)+nameFoodDelete+getString(R.string.was_deledted), Snackbar.LENGTH_SHORT).show();
         //uploadImage("delete",item);
 
         // loadMenu();

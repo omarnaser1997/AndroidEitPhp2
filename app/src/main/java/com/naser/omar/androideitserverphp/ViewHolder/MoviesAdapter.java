@@ -6,12 +6,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Movie;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,18 +33,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kosalgeek.android.photoutil.ImageLoader;
 import com.naser.omar.androideitserverphp.Common.Common;
+import com.naser.omar.androideitserverphp.Database.Database;
 import com.naser.omar.androideitserverphp.FoodList;
 import com.naser.omar.androideitserverphp.Home;
 import com.naser.omar.androideitserverphp.Interface.ItemClickListener;
 import com.naser.omar.androideitserverphp.Model.Category;
 import com.naser.omar.androideitserverphp.Model.Food;
+import com.naser.omar.androideitserverphp.Model.Image64;
 import com.naser.omar.androideitserverphp.MySingleton;
 import com.naser.omar.androideitserverphp.R;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +65,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     private Activity activity;
     private String selectedPhoto;
     MyViewHolder holder;
+    ArrayList<String> listimage64;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements
@@ -84,6 +93,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             view.setOnCreateContextMenuListener(this);
             view.setOnClickListener(this);
             MoviesAdapter.this.i=i;
+            listimage64=new ArrayList<String>();
 
         }
 
@@ -118,7 +128,45 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         this.selectedPhoto=selectedPhoto;//this is path of selected photo from user
     }
 
+    String  idcategory=null;
+    String  namecategory=null;
 
+
+    //create Target from Picasso
+    Target target =new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+
+
+
+
+            String encodedImage=null;
+
+            ////////////////////////////////////////////////////////
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.WEBP, 40, baos);
+            byte[] byteImage_photo = baos.toByteArray();
+            encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
+
+
+            //this Array contint first 3 eliment from serverDB
+           // listimage64.add(encodedImage);
+            Image64 image=new Image64(namecategory,encodedImage,idcategory);
+            new Database(context).addToImage(image);
+
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    };
 
 
     @Override
@@ -165,14 +213,30 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             Category category = moviesList.get(position);
             holder.nameCategory.setText(category.getName());
 
-            Picasso.with(context).load(category.getImage())
-                    //.resize(1400, 900)
-                    .fit()
-                    .centerCrop()
-                    // .placeholder(R.drawable.progress_animation)//تعرض هذه الصورة الى ان يكتمل تحميل الصوره
-                    .error(R.drawable.user_placeholder_error)
-                    .into(holder.imageCategory);
+            if(category.getImage()!=null)
+            {
+                Picasso.with(context).load(category.getImage())
+                        //.resize(1400, 900)
+                        .fit()
+                        .centerCrop()
+                        // .placeholder(R.drawable.progress_animation)//تعرض هذه الصورة الى ان يكتمل تحميل الصوره
+                        .error(R.drawable.user_placeholder_error)
+                        .into(holder.imageCategory);
+            }else
+                {
+                    //decode base64 string to image
+                    ByteArrayOutputStream baos =new ByteArrayOutputStream();
+                    byte[] imageBytes =baos.toByteArray();
 
+
+                    String imageString =  category.getBase64();
+
+                     imageBytes =Base64.decode(imageString,Base64.DEFAULT);
+
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
+                    holder.imageCategory.setImageBitmap(decodedImage);
+
+                }
           /////////////////////////////////////////////////////////////////////////////////
           //when you prassed on image option button
            holder.imgoptions.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +256,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     //Because CategoryId is Key , so we just get Key of this item
                     foodList.putExtra("CategoryId", moviesList.get(position).getCategoryID());
                     activity.startActivity(foodList);
+
+
+                   Picasso.with(context)
+                           .load(moviesList.get(position).getImage())
+                           .into(target);
+
+                   //this parameter for target  for insert in LDB
+                   idcategory= moviesList.get(position).getCategoryID();
+                   namecategory=moviesList.get(position).getName();
                }
            });
         }

@@ -27,7 +27,7 @@
         <!--android:textColor="@android:color/holo_blue_dark" />-->
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtName"
-            android:hint="Name"
+            android:hint="@string/Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -53,7 +53,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPassword"
-            android:hint="Password"
+            android:hint="@string/Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -78,7 +78,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPhone"
-            android:hint="Phone Number"
+            android:hint="@string/Phone_Number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -96,7 +96,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtSecureCode"
-            android:hint="Secure Code"
+            android:hint="@string/Secure_Code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -143,7 +143,7 @@
         android:background="@android:color/white"
         android:backgroundTint="@android:color/white"
 
-        android:text="Sign Up"
+        android:text="@string/Sign_Up"
         android:textColor="@color/btnSignUp"
         app:buttonColor="@color/fbutton_color_midnight_blue"
         app:layout_constraintBottom_toBottomOf="parent"
