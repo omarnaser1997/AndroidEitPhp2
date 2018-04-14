@@ -170,7 +170,7 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  printAllNotficationinDB();
+                  //printAllNotficationinDB();
                 // printAllIDNotification();
                 Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
 
@@ -742,7 +742,7 @@ try {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        t1.speak("Good-bye "+Common.currentUser.getName(), TextToSpeech.QUEUE_FLUSH, null);
+       // t1.speak("Good-bye "+Common.currentUser.getName(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
 

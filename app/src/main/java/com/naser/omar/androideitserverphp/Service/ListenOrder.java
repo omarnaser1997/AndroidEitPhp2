@@ -30,6 +30,7 @@ import com.naser.omar.androideitserverphp.Database.Database;
 import com.naser.omar.androideitserverphp.FoodList;
 import com.naser.omar.androideitserverphp.Home;
 import com.naser.omar.androideitserverphp.MainActivity;
+import com.naser.omar.androideitserverphp.Model.AppNotification;
 import com.naser.omar.androideitserverphp.Model.User;
 import com.naser.omar.androideitserverphp.MySingleton;
 import com.naser.omar.androideitserverphp.Notificaton.NotificationPicture;
@@ -79,7 +80,7 @@ public class ListenOrder extends Service implements Response.Listener<String> {
         MyThread t1 =new MyThread();
         t1.start();
 
-
+        printAllNotficationinDB();
 
         return Service.START_STICKY;
     }
@@ -103,6 +104,7 @@ public class ListenOrder extends Service implements Response.Listener<String> {
         notificationPicture.notify(getApplicationContext(),new Database(getApplicationContext()).getNotification().get(id).getTextNotification(),
                 new Database(getApplicationContext()).getNotification().get(id).getTitle(),id);
 
+        new Database(getApplicationContext()).updateViewNotificsation(new Database(getApplicationContext()).getNotification().get(id),1);
 
     }
 
@@ -117,7 +119,24 @@ public class ListenOrder extends Service implements Response.Listener<String> {
         return notificationID;
 
     }
+    void printAllNotficationinDB(){
 
+        List<AppNotification> notificationDB =  new Database(getApplicationContext()).getNotification();
+
+        for (AppNotification notification:notificationDB) {
+            Log.d("2245622546547222", String.valueOf(notification.getView()));
+        }
+    }
+
+    void printAllIDNotification1(){
+
+        List<Integer> notificationDB =  new Database(getApplicationContext()).getlistIDnotification();
+
+        for (Integer notification:notificationDB) {
+            Log.d("2222222", String.valueOf(notification));
+        }
+
+    }
 
 
     class MyThread extends Thread{
@@ -139,17 +158,22 @@ public class ListenOrder extends Service implements Response.Listener<String> {
 
 
 
-        for (int i=0;i<IDnotification.size();i++){
-            try {
-                Thread.sleep(1200000 *3);
-               // Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            createNotification(i);
+        for (int i=0;i<IDnotification.size();i++) {
+            if (
+                    new Database(getApplicationContext()).getNotification().get(i).getView() == 1) {
+                i++;
+            } else {
+                createNotification(i);
+                try {
+                    Thread.sleep(300000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
 
             }
 
+        }
 
         }
     }

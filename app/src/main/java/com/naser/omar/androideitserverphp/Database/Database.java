@@ -320,5 +320,13 @@ public class Database extends SQLiteAssetHelper{
 
     }
 
+    public void updateViewNotificsation(AppNotification notification,int view) {
+        SQLiteDatabase db=getReadableDatabase();
+        String query = String.format("UPDATE Notification SET view=%s WHERE id = %d",
+                view,notification.getId());
+        db.execSQL(query);
+    }
+
+
 
 }
