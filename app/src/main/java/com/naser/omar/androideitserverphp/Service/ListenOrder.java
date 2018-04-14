@@ -52,16 +52,20 @@ public class ListenOrder extends Service implements Response.Listener<String> {
 
     List<Integer> IDnotification;
 
+
+
    int  numItemInList=0;
     @Override
     public void onCreate() {
         super.onCreate();
 
 
-        IDnotification= printAllIDNotification();
+       // IDnotification= printAllIDNotification();
 
         Toast.makeText(this, "omarrrrrrrrrrr", Toast.LENGTH_SHORT).show();
     }
+
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -80,7 +84,7 @@ public class ListenOrder extends Service implements Response.Listener<String> {
         MyThread t1 =new MyThread();
         t1.start();
 
-        printAllNotficationinDB();
+      //  printAllNotficationinDB();
 
         return Service.START_STICKY;
     }
@@ -96,15 +100,16 @@ public class ListenOrder extends Service implements Response.Listener<String> {
         Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
     }
 
-    public  void createNotification(int id){
+    public  void createNotification(){
 
 
 
-        NotificationPicture notificationPicture=new NotificationPicture();
-        notificationPicture.notify(getApplicationContext(),new Database(getApplicationContext()).getNotification().get(id).getTextNotification(),
-                new Database(getApplicationContext()).getNotification().get(id).getTitle(),id);
+        NotificationPicture notificationPicture=new NotificationPicture(getApplicationContext());
+      //  notificationPicture.notify(getApplicationContext(),new Database(getApplicationContext()).getNotification().get(id).getTextNotification(),
+       //         new Database(getApplicationContext()).getNotification().get(id).getTitle(),id);
 
-        new Database(getApplicationContext()).updateViewNotificsation(new Database(getApplicationContext()).getNotification().get(id),1);
+     //   notificationPicture.notify(getApplicationContext());
+       // new Database(getApplicationContext()).updateViewNotificsation(new Database(getApplicationContext()).getNotification().get(id),1);
 
     }
 
@@ -142,8 +147,12 @@ public class ListenOrder extends Service implements Response.Listener<String> {
     class MyThread extends Thread{
         @Override
         public void run() {
-
-
+            while (true){
+            createNotification();
+            try {
+                Thread.sleep(5000);
+            }catch (Exception e){}
+            }
 
 //        for (Integer item:IDnotification) {
 //            try {
@@ -157,23 +166,23 @@ public class ListenOrder extends Service implements Response.Listener<String> {
 //        }
 
 
-
-        for (int i=0;i<IDnotification.size();i++) {
-            if (
-                    new Database(getApplicationContext()).getNotification().get(i).getView() == 1) {
-                i++;
-            } else {
-                createNotification(i);
-                try {
-                    Thread.sleep(300000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-        }
+//
+//        for (int i=0;i<IDnotification.size();i++) {
+//            if (
+//                    new Database(getApplicationContext()).getNotification().get(i).getView() == 1) {
+//                i++;
+//            } else {
+//                createNotification(i);
+//                try {
+//                    Thread.sleep(1800000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//
+//        }
 
         }
     }

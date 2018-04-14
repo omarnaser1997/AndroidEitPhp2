@@ -170,13 +170,13 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  //printAllNotficationinDB();
+                  printAllNotficationinDB();
                 // printAllIDNotification();
-                Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
+               // Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
 
 
-                Intent cartIntent=new Intent(Home.this,Cart.class);//نافذه المشتريات
-                startActivity(cartIntent);
+              //  Intent cartIntent=new Intent(Home.this,Cart.class);//نافذه المشتريات
+             //   startActivity(cartIntent);
 
 //                Intent TESTMainActivitye=new Intent(Home.this,TESTMainActivitye.class);//نافذه المشتريات
 //                  startActivity(TESTMainActivitye);
@@ -589,7 +589,7 @@ try {
         List<AppNotification> notificationDB =  new Database(getApplicationContext()).getNotification();
 
         for (AppNotification notification:notificationDB) {
-            Log.d("2222222", String.valueOf(notification.getImageURL()));
+            Log.d("22222453454322", String.valueOf(notification.getTextNotification()));
         }
     }
 

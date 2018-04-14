@@ -13,16 +13,31 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.kosalgeek.android.json.JsonConverter;
 import com.naser.omar.androideitserverphp.Database.Database;
+import com.naser.omar.androideitserverphp.Home;
+import com.naser.omar.androideitserverphp.Model.AppNotification;
+import com.naser.omar.androideitserverphp.MySingleton;
 import com.naser.omar.androideitserverphp.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Helper class for showing and canceling picture
@@ -35,7 +50,90 @@ public class NotificationPicture {
     /**
      * The unique identifier for this type of notification.
      */
+
+    Context context;
+
     private static final String NOTIFICATION_TAG = "Title";
+    ArrayList<AppNotification> notificationList;
+
+    public NotificationPicture(final Context context) {
+        this.context=context;
+
+        String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/DBClass/getNotification.php";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                       // Toast.makeText(context, "" + response, Toast.LENGTH_SHORT).show();
+
+
+                        notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
+                        // Toast.makeText(Home.this, notificationList.get(0).getImageURL(), Toast.LENGTH_SHORT).show();
+                        // Log.d("25436678443",notificationList.get(0).getImageURL().toString());
+                        // Log.d("254336778443",notificationList.get(0).getView()+"");
+
+
+                        //Add all notification from SDB to LDB
+                        for (AppNotification notification : notificationList) {
+                            try {
+                                new Database(context).addNotification(notification);
+                            } catch (Exception e) {
+                                 //Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        for (int i = 0; i < new Database(context).getNotification().size(); i++) {
+                            if (new Database(context).getNotification().get(i).getView() == 1) {
+
+                            } else {
+                                notifyy(context);
+                                new Database(context).updateViewNotificsation(new Database(context).getNotification().get(i),1);
+
+                            }
+
+
+                        }
+                    }
+                },     new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+       // printAllNotficationinDB();
+       printAllNotficationinDBfff();
+
+    }
+
+    void printAllNotficationinDBfff(){
+
+        List<AppNotification> notificationDB =  new Database(context).getNotification();
+
+        for (AppNotification notification:notificationDB) {
+            Log.d("2245622546547222", String.valueOf(notification.getView()));
+        }
+    }
+    void printAllNotficationinDB(){
+
+        List<AppNotification> notificationDB =  new Database(context).getNotification();
+
+        for (AppNotification notification:notificationDB) {
+            Log.d("22222453454322", String.valueOf(notification.getTextNotification()));
+        }
+    }
+
 
     /**
      * Shows the notification, or updates a previously shown notification of
@@ -52,10 +150,11 @@ public class NotificationPicture {
      *
      * @see #cancel(Context)
      */
-    public static void notify(final Context context,final String description,
-                              final String title ,final int number) {
+    public  void notifyy(final Context context){
 
-
+        final String description= null;
+        final String title = null;
+        final int number;
 
 
 
@@ -102,7 +201,7 @@ public class NotificationPicture {
 
                 // Show a number. This is useful when stacking notifications of
                 // a single type.
-                .setNumber(number)
+                .setNumber(1)
 
                 // If this notification relates to a past or upcoming event, you
                 // should set the relevant time information using the setWhen
