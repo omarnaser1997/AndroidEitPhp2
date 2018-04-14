@@ -2,6 +2,7 @@ package com.naser.omar.androideitserverphp;
 
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -79,8 +81,10 @@ import com.kosalgeek.asynctask.PostResponseAsyncTask;
 import com.naser.omar.androideitserverphp.Common.Common;
 import com.naser.omar.androideitserverphp.Database.Database;
 import com.naser.omar.androideitserverphp.Listener.EndlessRecyclerViewScrollListener;
+import com.naser.omar.androideitserverphp.Model.AppNotification;
 import com.naser.omar.androideitserverphp.Model.Category;
 import com.naser.omar.androideitserverphp.Model.Image64;
+import com.naser.omar.androideitserverphp.Notificaton.NotificationPicture;
 import com.naser.omar.androideitserverphp.Service.ListenOrder;
 import com.naser.omar.androideitserverphp.ViewHolder.FoodViewHolder;
 import com.naser.omar.androideitserverphp.ViewHolder.MenuViewHolder;
@@ -94,6 +98,7 @@ import com.stepstone.apprating.C;
 import dmax.dialog.SpotsDialog;
 import info.hoang8f.widget.FButton;
 import io.paperdb.Paper;
+import okhttp3.internal.Internal;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -138,6 +143,7 @@ public class Home extends AppCompatActivity
     ArrayList<Category> productListjson;
     ArrayList<String> listimage64;
 
+    ArrayList<AppNotification> notificationList;
     SwipeRefreshLayout swipeRefreshLayout;
 
     CounterFab fab;
@@ -150,6 +156,8 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getNotificatonfromSDB();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.Menu));
         setSupportActionBar(toolbar);
@@ -162,6 +170,11 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                  printAllNotficationinDB();
+                // printAllIDNotification();
+                Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
+
+
                 Intent cartIntent=new Intent(Home.this,Cart.class);//نافذه المشتريات
                 startActivity(cartIntent);
 
@@ -571,6 +584,75 @@ try {
         progress_bar.setVisibility(View.GONE);
     }
 
+    void printAllNotficationinDB(){
+
+        List<AppNotification> notificationDB =  new Database(getApplicationContext()).getNotification();
+
+        for (AppNotification notification:notificationDB) {
+            Log.d("2222222", String.valueOf(notification.getImageURL()));
+        }
+    }
+
+    void printAllIDNotification(){
+
+        List<Integer> notificationDB =  new Database(getApplicationContext()).getlistIDnotification();
+
+        for (Integer notification:notificationDB) {
+            Log.d("2222222", String.valueOf(notification));
+        }
+
+    }
+
+    void getNotificatonfromSDB(){
+
+//        AppNotification notification = new AppNotification(1,"omar","the first notification");
+//
+//        new Database(getApplicationContext()).addNotification(notification);
+
+        notificationList=new ArrayList<AppNotification>();
+
+        String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/DBClass/getNotification.php";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                      //  Log.d("254362343",response);
+
+                        notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
+                       // Toast.makeText(Home.this, notificationList.get(0).getImageURL(), Toast.LENGTH_SHORT).show();
+                       // Log.d("25436678443",notificationList.get(0).getImageURL().toString());
+                       // Log.d("254336778443",notificationList.get(0).getView()+"");
+
+
+                        //Add all notification from SDB to LDB
+                        for (AppNotification notification:notificationList) {
+                           try{ new Database(getApplication()).addNotification(notification);}
+                           catch (Exception e){
+                              // Toast.makeText(Home.this, e.toString(), Toast.LENGTH_SHORT).show();
+                           }
+                        }
+
+                    }
+                },     new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Home.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
+
+    }
 
     @Override
     public void onResponse(String response) {
@@ -663,6 +745,8 @@ try {
         t1.speak("Good-bye "+Common.currentUser.getName(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
+
+
 
     void deletCategory(int item) {
         productList.remove(item);

@@ -1,10 +1,13 @@
 package com.naser.omar.androideitserverphp.Database;
 
+import android.app.Notification;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.widget.Toast;
 
+import com.naser.omar.androideitserverphp.Model.AppNotification;
 import com.naser.omar.androideitserverphp.Model.Category;
 import com.naser.omar.androideitserverphp.Model.Image64;
 import com.naser.omar.androideitserverphp.Model.Order;
@@ -241,7 +244,81 @@ public class Database extends SQLiteAssetHelper{
 
     }
 
+  ///////////////////////////////////////////////////////////////////////////////////
+  //Notificaion
 
+    public List<AppNotification> getNotification(){
+
+        SQLiteDatabase db=getReadableDatabase();
+        SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
+
+        //name Fields in the Table
+        String[] sqlSelect={"id,textNotification,view,title,imageURl"};
+        //name Table
+        String sqlTable="Notification";
+
+        qb.setTables(sqlTable);
+        Cursor c=qb.query(db,sqlSelect,null,null,null,null,null);
+        final List<AppNotification> result=new ArrayList<>();
+        if(c.moveToFirst()){
+
+            do{
+                result.add(new AppNotification(
+                        c.getInt(c.getColumnIndex("id")),
+                        c.getInt(c.getColumnIndex("view")),
+                        c.getString(c.getColumnIndex("title")),
+                        c.getString(c.getColumnIndex("textNotification")),
+                        c.getString(c.getColumnIndex("imageURl"))
+
+
+                                              )
+                );
+
+            }while (c.moveToNext());
+        }
+
+        return  result;
+    }
+
+    public void addNotification(AppNotification notification) {
+        SQLiteDatabase db=getReadableDatabase();
+        String query=String.format("INSERT INTO Notification(id,textNotification,title,view,imageURl) VALUES ('%s','%s','%s','%s','%s');",
+                notification.getId(),
+                notification.getTextNotification(),
+                notification.getTitle(),
+                notification.getView(),
+                notification.getImageURL()
+
+        );
+
+            db.execSQL(query);
+
+    }
+
+    public List<Integer> getlistIDnotification(){
+
+        SQLiteDatabase db=getReadableDatabase();
+        SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
+
+        //name Fields in the Table
+        String[] sqlSelect={"id"};
+        //name Table
+        String sqlTable="Notification";
+
+        qb.setTables(sqlTable);
+        Cursor c=qb.query(db,sqlSelect,null,null,null,null,null);
+        final List<Integer> result=new ArrayList<>();
+        if(c.moveToFirst()){
+
+            do{
+                result.add(c.getInt(c.getColumnIndex("id")));
+
+            }while (c.moveToNext());
+        }
+
+        return  result;
+
+    }
 
 
 }

@@ -41,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.kosalgeek.android.json.JsonConverter;
 import com.naser.omar.androideitserverphp.Common.Common;
 import com.naser.omar.androideitserverphp.Database.Database;
+import com.naser.omar.androideitserverphp.Model.AppNotification;
 import com.naser.omar.androideitserverphp.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity{
     TextView txtslogan;
     LoginButton login_button;
     CallbackManager callbackManager;
+    ArrayList<AppNotification> notificationList;
     private static final int REQUEST_CODE =7171 ;
 
 
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity{
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         setContentView(R.layout.activity_main);
+        getNotificatonfromSDB();
         btnSingin=(Button)findViewById(R.id.btnSingnUp);
         txtslogan=(TextView)findViewById(R.id.txtSlogan);
 
@@ -303,6 +306,54 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+
+    }
+
+    void getNotificatonfromSDB(){
+
+//        AppNotification notification = new AppNotification(1,"omar","the first notification");
+//
+//        new Database(getApplicationContext()).addNotification(notification);
+
+        notificationList=new ArrayList<AppNotification>();
+
+        String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/DBClass/getNotification.php";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
+                        //Toast.makeText(Home.this, notificationList.get(0).getTextNotification(), Toast.LENGTH_SHORT).show();
+
+                        //Add all notification from SDB to LDB
+                        for (AppNotification notification:notificationList) {
+                           try{ new Database(getApplication()).addNotification(notification);}
+                           catch (Exception e){
+                              // Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                           }
+                        }
+
+                    }
+                },     new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
 
     }
 

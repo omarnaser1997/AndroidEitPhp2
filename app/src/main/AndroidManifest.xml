@@ -19,6 +19,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -76,7 +77,7 @@
             android:authorities="com.facebook.app.FacebookContentProvider183920575669167"
             android:exported="true" />
 
-        <activity android:name=".TESTMainActivitye"></activity>
+        <activity android:name=".TESTMainActivitye" />
     </application>
 
 </manifest>
