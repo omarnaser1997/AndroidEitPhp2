@@ -156,7 +156,7 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getNotificatonfromSDB();
+        //getNotificatonfromSDB();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.Menu));
@@ -166,17 +166,24 @@ public class Home extends AppCompatActivity
        // I written this Function for using Paper Library
         Paper.init(this);
 
+
+
+        Intent service= new Intent(Home.this, ListenOrder.class);
+        startService(service);
+
+
         fab = (CounterFab) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  printAllNotficationinDB();
+                  //printAllNotficationinDB();
+
                 // printAllIDNotification();
                // Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
 
 
-              //  Intent cartIntent=new Intent(Home.this,Cart.class);//نافذه المشتريات
-             //   startActivity(cartIntent);
+                Intent cartIntent=new Intent(Home.this,Cart.class);//نافذه المشتريات
+                startActivity(cartIntent);
 
 //                Intent TESTMainActivitye=new Intent(Home.this,TESTMainActivitye.class);//نافذه المشتريات
 //                  startActivity(TESTMainActivitye);
@@ -278,7 +285,9 @@ try {
             public void run() {
                 if (Common.isConnectedToInternet(getBaseContext())){
                     //image form LDB
-                    new Database(getApplicationContext()).deleteAllformImage();
+                  try{  new Database(getApplicationContext()).deleteAllformImage();}catch (Exception e){
+                      Toast.makeText(Home.this, e.toString(), Toast.LENGTH_SHORT).show();
+                  }
                    // loadMenu(1);
                 }else {
                     Toast.makeText(getBaseContext(), getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
@@ -302,9 +311,6 @@ try {
 //        loadMenu();
 
 
-
-        Intent service= new Intent(Home.this, ListenOrder.class);
-        startService(service);
 
 
 
@@ -552,6 +558,10 @@ try {
 
         }
 
+        else if (id == R.id.nav_Notification) {
+           showCreatNotification();
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -589,8 +599,12 @@ try {
         List<AppNotification> notificationDB =  new Database(getApplicationContext()).getNotification();
 
         for (AppNotification notification:notificationDB) {
-            Log.d("22222453454322", String.valueOf(notification.getTextNotification()));
+            Log.d("2453454322", String.valueOf(notification.getTextNotification()));
+            Toast.makeText(this, String.valueOf(notification.getView()), Toast.LENGTH_SHORT).show();
         }
+//       try{ new Database(this).updateViewNotificsation(9,1);}catch (Exception e){
+//           Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+//       }
     }
 
     void printAllIDNotification(){
@@ -1001,6 +1015,60 @@ try {
 
 
     }
+
+
+    private void showCreatNotification() {
+        AlertDialog.Builder alertDialog =new AlertDialog.Builder(Home.this);
+        alertDialog.setTitle(getString(R.string.Add_new_Category));
+        alertDialog.setMessage(getString(R.string.Please_fill_full_information));
+
+        LayoutInflater inflater =this.getLayoutInflater();
+        View add_menu_layout =inflater.inflate(R.layout.create_new_notification,null);
+
+        edtName=add_menu_layout.findViewById(R.id.edtName);
+        btnSelect=add_menu_layout.findViewById(R.id.btnSelect);
+        btnUpload=add_menu_layout.findViewById(R.id.btnUpload);
+
+        //Event For Button
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckUserPermsions(GALLERY_REQUEST);
+                //chooseImage();// let user select image from Gallery and save URL of this image
+            }
+        });
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+            }
+        });
+
+
+
+        alertDialog.setView(add_menu_layout);
+        alertDialog.setIcon(R.drawable.ic_notifications_active_black_24dp);
+
+        //set button
+        alertDialog.setPositiveButton(getString(R.string.YES), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+
+
+            }
+        });
+//        alertDialog.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                dialogInterface.dismiss();
+//            }
+//        });
+        alertDialog.show();
+    }
+
     private void showChangePasswordDialog() {
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(Home.this);
         alertDialog.setTitle(getString(R.string.CHANGE_PASSWORD));

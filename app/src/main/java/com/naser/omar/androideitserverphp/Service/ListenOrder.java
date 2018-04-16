@@ -59,10 +59,6 @@ public class ListenOrder extends Service implements Response.Listener<String> {
     public void onCreate() {
         super.onCreate();
 
-
-       // IDnotification= printAllIDNotification();
-
-        Toast.makeText(this, "omarrrrrrrrrrr", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -71,16 +67,6 @@ public class ListenOrder extends Service implements Response.Listener<String> {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-
-//        for (Integer item:IDnotification) {
-//            try {
-//                Thread.sleep(3000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//           try{ createNotification(item);}catch (Exception e){}
-//
-//        }
         MyThread t1 =new MyThread();
         t1.start();
 
@@ -124,6 +110,7 @@ public class ListenOrder extends Service implements Response.Listener<String> {
         return notificationID;
 
     }
+
     void printAllNotficationinDB(){
 
         List<AppNotification> notificationDB =  new Database(getApplicationContext()).getNotification();
@@ -150,62 +137,15 @@ public class ListenOrder extends Service implements Response.Listener<String> {
             while (true){
             createNotification();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(10000);
             }catch (Exception e){}
             }
 
-//        for (Integer item:IDnotification) {
-//            try {
-//                //Thread.sleep(1200000 *3);
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            createNotification(item);
-//
-//        }
-
-
-//
-//        for (int i=0;i<IDnotification.size();i++) {
-//            if (
-//                    new Database(getApplicationContext()).getNotification().get(i).getView() == 1) {
-//                i++;
-//            } else {
-//                createNotification(i);
-//                try {
-//                    Thread.sleep(1800000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//            }
-//
-//        }
 
         }
     }
 
 }
-
-
-
-
-
-
-//new Database(getApplicationContext()).getUser().get(0).getImage()
-
-
-
-
-
-
-
-
-
-//
-//
 
 
 

@@ -29,6 +29,7 @@ import com.kosalgeek.android.json.JsonConverter;
 import com.naser.omar.androideitserverphp.Database.Database;
 import com.naser.omar.androideitserverphp.Home;
 import com.naser.omar.androideitserverphp.Model.AppNotification;
+import com.naser.omar.androideitserverphp.Model.ViewNotification;
 import com.naser.omar.androideitserverphp.MySingleton;
 import com.naser.omar.androideitserverphp.R;
 import com.squareup.picasso.Picasso;
@@ -59,6 +60,9 @@ public class NotificationPicture {
     public NotificationPicture(final Context context) {
         this.context=context;
 
+
+
+
         String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/DBClass/getNotification.php";
 
         StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
@@ -66,7 +70,7 @@ public class NotificationPicture {
                     @Override
                     public void onResponse(String response) {
 
-                       // Toast.makeText(context, "" + response, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context,response, Toast.LENGTH_SHORT).show();
 
 
                         notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
@@ -74,32 +78,75 @@ public class NotificationPicture {
                         // Log.d("25436678443",notificationList.get(0).getImageURL().toString());
                         // Log.d("254336778443",notificationList.get(0).getView()+"");
 
+                        if (notificationList!=null) {
+                            for (AppNotification notification : notificationList) {
 
-                        //Add all notification from SDB to LDB
-                        for (AppNotification notification : notificationList) {
-                            try {
-                                new Database(context).addNotification(notification);
-                            } catch (Exception e) {
-                                 //Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                                if (!searchID(notification.getId())) {
+                                    try {
+                                        new Database(context).addNotification(notification);
+                                    } catch (Exception e) {
+                                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                    Log.d("4376375", "sucsses Add to DB");
+                                }
                             }
                         }
 
-                        for (int i = 0; i < new Database(context).getNotification().size(); i++) {
-                            if (new Database(context).getNotification().get(i).getView() == 1) {
 
-                            } else {
-                                notifyy(context);
-                                new Database(context).updateViewNotificsation(new Database(context).getNotification().get(i),1);
 
+
+                            List<AppNotification> listnotification =new Database(context).getNotification();
+
+                            if (listnotification!=null) {
+                                for (AppNotification notification : listnotification) {
+
+                                    createNotification(notification);
+                                }
                             }
 
 
-                        }
                     }
                 },     new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("NumberUser",new Database(context).getUser().get(0).getNumber());
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+       // printAllNotficationinDB();
+      // printAllNotficationinDBfff();
+
+    }
+
+    private void createNotification(final AppNotification notification){
+
+        String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/DBClass/checkNotification.php";
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ViewNotification view = new JsonConverter<ViewNotification>().toArrayList(response, ViewNotification.class).get(0);
+                        //Toast.makeText(context,view.getView()+"", Toast.LENGTH_SHORT).show();
+
+                        if(view.getView()==0){
+                            createNewNotification(notification);
+                        }
+
+                    }
+                },     new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
 
@@ -107,14 +154,39 @@ public class NotificationPicture {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params =new HashMap<>();
 
+                params.put("NotificationID",String.valueOf(notification.getId()));
+                params.put("NumberUser",new Database(context).getUser().get(0).getNumber());
+
+
                 return params;
             }
         };
         MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+    }
 
-       // printAllNotficationinDB();
-       printAllNotficationinDBfff();
 
+    private void createNewNotification(AppNotification notification){
+
+        try{
+             notifyy(context,notification.getTextNotification(),notification.getTitle(),notification.getId());
+            }catch (Exception e){
+            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    boolean searchID(Integer id){
+
+        List<Integer> notificationID =getIDnotification();
+        if (notificationID!=null){
+        for (Integer item
+                : notificationID){
+
+            if (id == item) {
+                return true;
+            }
+        }
+        }
+        return false;
     }
 
     void printAllNotficationinDBfff(){
@@ -150,11 +222,8 @@ public class NotificationPicture {
      *
      * @see #cancel(Context)
      */
-    public  void notifyy(final Context context){
+    public  void notifyy(final Context context,final String description,final String title,final int number){
 
-        final String description= null;
-        final String title = null;
-        final int number;
 
 
 
@@ -201,7 +270,7 @@ public class NotificationPicture {
 
                 // Show a number. This is useful when stacking notifications of
                 // a single type.
-                .setNumber(1)
+                .setNumber(number)
 
                 // If this notification relates to a past or upcoming event, you
                 // should set the relevant time information using the setWhen
@@ -275,4 +344,52 @@ public class NotificationPicture {
             nm.cancel(NOTIFICATION_TAG.hashCode());
         }
     }
+
+    public List getIDnotification() {
+        List<Integer> IDnotification=null;
+           try {
+               IDnotification =  new Database(context).getlistIDnotification();
+           }catch (Exception e){}
+
+        return IDnotification;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                        int i=0;
+//                        for (AppNotification notificationn:listnotification) {
+//                           try{
+//                            if (new Database(context).getNotification().get(i).getView() == 1) {
+//
+//
+//                            } else {
+//                                id=new Database(context).getNotification().get(i).getId();
+//                                    new Database(context).updateViewNotificsation(id,1);
+//
+//                                AppNotification notification= new Database(context).getNotification().get(i);
+//                                try{
+//                                notifyy(context,notification.getTextNotification(),notification.getTitle(),notification.getId());
+//                                }catch (Exception e){}
+//                            }
+//
+//
+//                        }catch (Exception e){
+//                               Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+//                           }
+//                           i++;
+//                        }

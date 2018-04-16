@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.naser.omar.androideitserverphp.Model.AppNotification;
@@ -248,7 +249,7 @@ public class Database extends SQLiteAssetHelper{
   //Notificaion
 
     public List<AppNotification> getNotification(){
-
+        try{
         SQLiteDatabase db=getReadableDatabase();
         SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
 
@@ -258,7 +259,9 @@ public class Database extends SQLiteAssetHelper{
         String sqlTable="Notification";
 
         qb.setTables(sqlTable);
-        Cursor c=qb.query(db,sqlSelect,null,null,null,null,null);
+
+            Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
+
         final List<AppNotification> result=new ArrayList<>();
         if(c.moveToFirst()){
 
@@ -277,19 +280,27 @@ public class Database extends SQLiteAssetHelper{
             }while (c.moveToNext());
         }
 
-        return  result;
+        return  result;}
+        catch (Exception e){return  null;}
+
     }
 
     public void addNotification(AppNotification notification) {
         SQLiteDatabase db=getReadableDatabase();
-        String query=String.format("INSERT INTO Notification(id,textNotification,title,view,imageURl) VALUES ('%s','%s','%s','%s','%s');",
-                notification.getId(),
-                notification.getTextNotification(),
-                notification.getTitle(),
-                notification.getView(),
-                notification.getImageURL()
+//        String query=String.format("INSERT INTO Notification(id,textNotification,title,view,imageURl) VALUES ('%s','%s','%s','%s','%s');",
+//                notification.getId(),
+//                notification.getTextNotification(),
+//                notification.getTitle(),
+//                notification.getView(),
+//                notification.getImageURL()
+//
+//        );
 
-        );
+        String query="INSERT INTO Notification(id,textNotification,title,view,imageURl) VALUES ("+notification.getId()
+                +",'"+notification.getTextNotification()
+                +"','"+notification.getTitle()+"',"+notification.getView()+",'"+
+                notification.getImageURL()+"');";
+
 
             db.execSQL(query);
 
@@ -320,10 +331,12 @@ public class Database extends SQLiteAssetHelper{
 
     }
 
-    public void updateViewNotificsation(AppNotification notification,int view) {
+    public void updateViewNotificsation(int id,int view) {
         SQLiteDatabase db=getReadableDatabase();
-        String query = String.format("UPDATE Notification SET view=%s WHERE id = %d",
-                view,notification.getId());
+//        String query = String.format("UPDATE Notification SET view = %s WHERE id = %d",
+//                view,id);
+
+        String query="UPDATE Notification SET view = "+view+" WHERE id = "+id+"";
         db.execSQL(query);
     }
 

@@ -205,9 +205,9 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void Singin(View view) {
-//        Intent Singin =new Intent(this,SingIn.class);
-//    startActivity(Singin);
-        startLoginSystem();
+        Intent Singin =new Intent(this,SingIn.class);
+    startActivity(Singin);
+
     }
 
     public void Singup(View view) {
@@ -327,14 +327,6 @@ public class MainActivity extends AppCompatActivity{
 
                         notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
                         //Toast.makeText(Home.this, notificationList.get(0).getTextNotification(), Toast.LENGTH_SHORT).show();
-
-                        //Add all notification from SDB to LDB
-                        for (AppNotification notification:notificationList) {
-                           try{ new Database(getApplication()).addNotification(notification);}
-                           catch (Exception e){
-                              // Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                           }
-                        }
 
                     }
                 },     new Response.ErrorListener() {

@@ -56,6 +56,7 @@
     <string name="was_deledted">تم حذفه </string>
     <string name="Menu">القائمة</string>
     <string name="menu"> قائمةالطعام</string>
+    <string name="notification">انشاء تنبيه</string>
 
     <string name="Add_new_Category">إضافة فئة جديدة</string>
     <string name="New_category">New category</string>

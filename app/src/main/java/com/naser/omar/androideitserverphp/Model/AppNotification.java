@@ -17,7 +17,7 @@ public class AppNotification {
     private String textNotification;
 
     @SerializedName("view")
-    private int  view;
+    private int  view=0;
 
     @SerializedName("imageURL")
     private String imageURL;

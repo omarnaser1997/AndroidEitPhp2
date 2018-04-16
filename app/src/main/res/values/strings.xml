@@ -163,6 +163,7 @@
     <string name="Sign_out">Sign out</string>
     <string name="Refresh">Refresh</string>
     <string name="menu">Menu</string>
+    <string name="notification">Create Notification</string>
 
     <string name="picture_notification_title_template">Picture: %1$s</string>
 
