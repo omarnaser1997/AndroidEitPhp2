@@ -56,12 +56,14 @@
     <string name="was_deledted">تم حذفه </string>
     <string name="Menu">القائمة</string>
     <string name="menu"> قائمةالطعام</string>
+    <string name="CreateNotification">انشاء التنبيه</string>
     <string name="notification">انشاء تنبيه</string>
 
     <string name="Add_new_Category">إضافة فئة جديدة</string>
     <string name="New_category">New category</string>
     <string name="was_added">فئة جديدة</string>
-
+    <string name="create_new_Notification">انشاء تنبيه جديد</string>
+    <string name="TitleNotification">عنوان التنبيه</string>
     <string name="SELECTED">المحدد</string>
 
     <string name="CHANGE_PASSWORD">تغيير كلمة السر</string>
