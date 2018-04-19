@@ -12,7 +12,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,6 +37,12 @@ import com.naser.omar.androideitserverphp.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,7 +80,7 @@ public class NotificationPicture {
 
                        // Toast.makeText(context,response, Toast.LENGTH_SHORT).show();
 
-
+                        if(response!=null)
                         notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
                         // Toast.makeText(Home.this, notificationList.get(0).getImageURL(), Toast.LENGTH_SHORT).show();
                         // Log.d("25436678443",notificationList.get(0).getImageURL().toString());
@@ -85,7 +93,7 @@ public class NotificationPicture {
                                     try {
                                         new Database(context).addNotification(notification);
                                     } catch (Exception e) {
-                                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                                     }
                                     Log.d("4376375", "sucsses Add to DB");
                                 }
@@ -135,12 +143,18 @@ public class NotificationPicture {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        ViewNotification view = new JsonConverter<ViewNotification>().toArrayList(response, ViewNotification.class).get(0);
-                        //Toast.makeText(context,view.getView()+"", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                        if (response.indexOf("null")>-1) {
+                           // Toast.makeText(context, "omar", Toast.LENGTH_SHORT).show();
+                        }else {
+                           // Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                              ViewNotification view = new JsonConverter<ViewNotification>().toArrayList(response, ViewNotification.class).get(0);
 
                         if(view.getView()==0){
                             createNewNotification(notification);
                         }
+                        }
+
 
                     }
                 },     new Response.ErrorListener() {
@@ -164,14 +178,16 @@ public class NotificationPicture {
         MySingleton.getInstance(context).addToRequestQueue(stringRequest);
     }
 
-
+    AppNotification notification;
     private void createNewNotification(AppNotification notification){
+        Picasso.with(context).load(notification.getImageURL()).into(target);
+        this.notification=notification;
 
-        try{
-             notifyy(context,notification.getTextNotification(),notification.getTitle(),notification.getId());
-            }catch (Exception e){
-            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
-        }
+//        try{
+//             notifyy(context,notification.getTextNotification(),notification.getImageURL(),notification.getTitle(),notification.getId());
+//            }catch (Exception e){
+//            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+//        }
     }
 
     boolean searchID(Integer id){
@@ -222,18 +238,71 @@ public class NotificationPicture {
      *
      * @see #cancel(Context)
      */
-    public  void notifyy(final Context context,final String description,final String title,final int number){
+
+    public Bitmap StringToBitMap(String image){
+        try{
+            byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
+
+            InputStream inputStream  = new ByteArrayInputStream(encodeByte);
+            Bitmap bitmap  = BitmapFactory.decodeStream(inputStream);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+    public Bitmap getBitmapFromURL(String strURL) {
+        try {
+            URL url = new URL(strURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    Bitmap bbbbb=null;
+    private Target target = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            bbbbb=bitmap;
+            Toast.makeText(context, ""+bbbbb, Toast.LENGTH_SHORT).show();
+
+
+                notifyy(context,notification.getTextNotification(),bitmap,notification.getTitle(),notification.getId());
+
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+        }
+    };
+
+    public  void notifyy(final Context context,final String description,final Bitmap picture,final String title,final int number){
 
 
 
+       // Picasso.with(context).load(img).into(target);
 
         final Resources res = context.getResources();
 
         // This image is used as the notification's large icon (thumbnail) when
         // the notification is collapsed, and as the big picture to show when
         // the notification is expanded.
-        final Bitmap picture = BitmapFactory.decodeResource(res, R.drawable.example_picture);
 
+       //final Bitmap picture = BitmapFactory.decodeFile(bitmapFile);
+
+       // final Bitmap picture=bbbbb;//StringToBitMap(img);
 
         final String ticker = title;
 

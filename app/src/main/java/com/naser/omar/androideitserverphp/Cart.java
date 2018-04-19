@@ -1,5 +1,6 @@
 package com.naser.omar.androideitserverphp;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -39,7 +40,7 @@ import info.hoang8f.widget.FButton;
 
 
 
-public class Cart extends AppCompatActivity implements Response.Listener<String> {
+public class Cart extends Activity implements Response.Listener<String> {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;

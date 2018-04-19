@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AndroidEitServer</string>
-    <string name="slogan">We transport products to customers as quicky as our ex betrays</string>
+    <string name="slogan">للخدمات الاكترونية قطع تبديل الكترونية وغيرها من الدارات الكهربائة وقطع اكسسوارات الهواتف الذكية </string>
     <string name="title_activity_home">Home</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -56,6 +56,7 @@
 
 
     <string name="Add_new_Category">Add new Category</string>
+    <string name="create_new_Notification">Create new Notification</string>
     <string name="New_category">New category</string>
     <string name="was_added">was added</string>
 
@@ -117,6 +118,10 @@
 
 
     <string name="Name">Name</string>
+    <string name="TitleNotification">Title Notification</string>
+
+    <string name="textofnotification">Text Notification</string>
+
     <string name="Password">Password</string>
     <string name="Phone_Number">Phone Number</string>
     <string name="Secure_Code">Secure Code</string>
@@ -127,7 +132,7 @@
     <string name="SELECT">SELECT</string>
 
     <string name="UPLOAD">UPLOAD</string>
-
+    <string name="CreateNotification">Create Notification</string>
 
     <string name="Food_01">Food 01</string>
 
@@ -179,6 +184,11 @@
 
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>
+
+    <string name="title_activity_full_car">FullActivityCar</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_maps222222222">Map</string>
 
 
 </resources>

@@ -4,9 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/fbutton_color_turquoise"
     tools:context="com.naser.omar.androideitserverphp.SingIn">
+
+    <TextView
+        android:id="@+id/txtSlogan1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="المتوسط"
+        android:textColor="@color/white"
+        android:textSize="70sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029999971" />
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -14,8 +34,6 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -34,7 +52,6 @@
             app:met_primaryColor="@android:color/white"
 
             app:met_singleLineEllipsis="true" />
-
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -56,45 +73,43 @@
 
 
         <!--<com.rey.material.widget.CheckBox-->
-            <!--android:id="@+id/ckbRemember"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--style="@style/Material.Drawable.CheckBox"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:text="Remember me"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--app:cbd_strokeColor="@android:color/white"-->
-            <!--app:cbd_tickColor="@color/colorPrimaryDark"-->
-            <!--/>-->
+        <!--android:id="@+id/ckbRemember"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/Material.Drawable.CheckBox"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:text="Remember me"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--app:cbd_strokeColor="@android:color/white"-->
+        <!--app:cbd_tickColor="@color/colorPrimaryDark"-->
+        <!--/>-->
 
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:weightSum="2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <com.rey.material.widget.CheckBox
                 android:id="@+id/ckbRemember"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
                 style="@style/Material.Drawable.CheckBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/Remember_me"
                 android:textColor="@android:color/white"
                 app:cbd_strokeColor="@android:color/white"
-                app:cbd_tickColor="@color/colorPrimaryDark"
-                />
+                app:cbd_tickColor="@color/colorPrimaryDark" />
 
             <TextView
                 android:id="@+id/txtForgotpwd"
-                android:textColor="@android:color/white"
-                android:text="@string/forgot_pwd"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/forgot_pwd"
+                android:textColor="@android:color/white" />
 
 
         </LinearLayout>
@@ -119,7 +134,7 @@
         android:backgroundTint="@android:color/white"
         android:onClick="login"
         android:text="@string/Singn_In"
-        android:textColor="@color/btnSignUp"
+        android:textColor="@color/btnSingnUp"
         app:buttonColor="@color/fbutton_color_midnight_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

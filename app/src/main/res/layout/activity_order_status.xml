@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back"
+    android:background="@color/fbutton_color_turquoise"
     android:id="@+id/relativeLayoutRequest"
     tools:context="com.naser.omar.androideitserverphp.OrderStatus">
 

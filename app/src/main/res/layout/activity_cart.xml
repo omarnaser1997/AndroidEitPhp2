@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/fbutton_color_turquoise"
     android:padding="16dp"
     tools:context="com.naser.omar.androideitserverphp.MainActivity">
 <android.support.v7.widget.RecyclerView
@@ -15,7 +15,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_alignParentBottom="true"
-        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <RelativeLayout
@@ -57,7 +57,7 @@
                 android:layout_margin="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:background="@color/btnSignUp"
+                android:background="@color/fbutton_color_pomegranate"
                 android:backgroundTint="@color/btnSignUp"
                 android:padding="1dp"
 

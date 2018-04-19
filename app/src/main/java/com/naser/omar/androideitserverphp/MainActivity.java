@@ -1,5 +1,6 @@
 package com.naser.omar.androideitserverphp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,9 +62,9 @@ import io.paperdb.Paper;
 
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends Activity {
     Button btnSingin;
-    TextView txtslogan;
+    TextView txtslogan,txtslogan2;
     LoginButton login_button;
     CallbackManager callbackManager;
     ArrayList<AppNotification> notificationList;
@@ -81,16 +82,18 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         getNotificatonfromSDB();
         btnSingin=(Button)findViewById(R.id.btnSingnUp);
-        txtslogan=(TextView)findViewById(R.id.txtSlogan);
-
+        txtslogan=(TextView)findViewById(R.id.txtSlogan1);
+        txtslogan2=(TextView)findViewById(R.id.txtSlogan);
         printKeyHash();
 
         loginWithFB();
 
 
-        Typeface face =Typeface.createFromAsset(getAssets(),"fonts/NABILA.TTF");
-        txtslogan.setTypeface(face);
+        Typeface face =Typeface.createFromAsset(getAssets(),"fonts/ToyorAljanahFat.otf");
+        Typeface face2 =Typeface.createFromAsset(getAssets(),"fonts/Light.otf");
 
+        txtslogan.setTypeface(face);
+        txtslogan2.setTypeface(face2);
         //Init Paper
         Paper.init(this); // using paper to help you write key_value To Android memory
 
@@ -217,7 +220,7 @@ public class MainActivity extends AppCompatActivity{
 
     private void printKeyHash() {
         try{
-            PackageInfo info =getPackageManager().getPackageInfo("com.naser.omar.androideitserver",
+            PackageInfo info =getPackageManager().getPackageInfo("com.naser.omar.androideitserverphp",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature:info.signatures)
             {

@@ -328,6 +328,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
         dialog.show();
     }
+
     void showUpdateDialog(final int position) {
         final MaterialEditText edtName;
         FButton btnBack,btnUpload;

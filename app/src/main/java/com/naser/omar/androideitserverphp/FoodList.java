@@ -460,7 +460,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
     @Override
     public void onResponse(String response) {
 
-       // Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
         Log.d("3564543",response);
 
         //the list of page is fineshed
@@ -552,7 +552,6 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 try {
                     uploadImage("insert",0);
                 } catch (FileNotFoundException e) {
@@ -637,6 +636,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
         final ProgressDialog mDialog =new ProgressDialog(this);
         mDialog.setMessage("Uploading ...");
         mDialog.show();
+
         //////////////////////////////////////
 
         HashMap<String, String> postData = new HashMap<String, String>();
@@ -654,7 +654,7 @@ public class FoodList extends Activity  implements Response.Listener<String>{
             public void processFinish(String s) {
                       mDialog.dismiss();
                       loadListFood(categoryId,userpage);
-             //   Toast.makeText(FoodList.this, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodList.this, s, Toast.LENGTH_SHORT).show();
                // Snackbar.make(rootLayout," Food"+productList.get(item).getName()+"was "+statment, Snackbar.LENGTH_LONG).show();
                      }
         });

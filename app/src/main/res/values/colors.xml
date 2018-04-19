@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#004d40</color>
-    <color name="colorPrimaryDark">#00251a</color>
-    <color name="colorAccent">#39796b</color>
-
+    <color name="colorPrimary">#84c7dc</color>
+    <color name="colorPrimaryDark">#84c7dc</color>
+    <color name="colorAccent">#84c7dc</color>
 
 
     <!--Button Sing in -->
 
-    <color name="btnSingnUp">#39796b</color>
+    <color name="btnSingnUp">#3498db</color>
     <color name="btnSingActivite">#eff3e5</color>
 
     <color name="overlayBackground">#7f333639</color>
     <color name="overlayActionBar">#0e0d0e</color>
 
     <color name="color_black">#050505</color>
-    <color name="fbutton_color_turquoise">#1abc9c</color>
+    <color name="fbutton_color_turquoise">#84c7dc</color>
     <color name="fbutton_color_green_sea">#16a085</color>
     <color name="fbutton_color_emerald">#2ecc71</color>
     <color name="btnSignUp">#27ae60</color>
@@ -35,4 +34,6 @@
     <color name="fbutton_color_silver">#bdc3c7</color>
     <color name="fbutton_color_concrete">#95a5a6</color>
     <color name="fbutton_color_asbestos">#7f8c8d</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

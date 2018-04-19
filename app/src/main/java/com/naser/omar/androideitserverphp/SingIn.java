@@ -1,9 +1,11 @@
 package com.naser.omar.androideitserverphp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,11 +41,12 @@ import java.util.Map;
 
 import io.paperdb.Paper;
 
-public class SingIn extends AppCompatActivity {
+public class SingIn extends Activity {
     EditText edtPhone,edtPassword;
     Button btnSignIn;
     com.rey.material.widget.CheckBox ckbRemember;
     TextView txtForgotPwd;
+    TextView txtslogan;
 
 
     @Override
@@ -55,7 +58,9 @@ public class SingIn extends AppCompatActivity {
         btnSignIn=(Button)findViewById(R.id.btnSignIn);
         ckbRemember=(com.rey.material.widget.CheckBox)findViewById(R.id.ckbRemember);
         txtForgotPwd=(TextView)findViewById(R.id.txtForgotpwd);
-
+        txtslogan=(TextView)findViewById(R.id.txtSlogan1);
+        Typeface face =Typeface.createFromAsset(getAssets(),"fonts/ToyorAljanahFat.otf");
+        txtslogan.setTypeface(face);
         //Init Paper from library PAPER
         Paper.init(this);
 

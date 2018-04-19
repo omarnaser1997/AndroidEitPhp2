@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Movie;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import com.kosalgeek.android.photoutil.ImageLoader;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -51,18 +53,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -176,6 +185,17 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+             //   Picasso.with(getApplication()).load("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg").into(target);
+
+             //   getBitmapFromURLl("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
+
+               // File bitmapFile = new File(Environment.getExternalStorageDirectory() + "/" + "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
+              //  Bitmap bitmap = BitmapFactory.decodeFile(bitmapFile);
+
+
+               // Bitmap gg= getBitmapFromURL("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
+              //  Toast.makeText(Home.this, ""+gg, Toast.LENGTH_SHORT).show();
                   //printAllNotficationinDB();
 
                 // printAllIDNotification();
@@ -362,6 +382,11 @@ try {
     }
 
 
+
+
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -417,7 +442,7 @@ try {
                 byte[] byteImage_photo = baos.toByteArray();
                 encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
 
-                Log.d("43554654", encodedImage);
+                Log.d("43554654", edtName.getText().toString());
                 ///////////////////////////////////////
             }catch (Exception e){}
             //if(btnSelectBool==false){encodedImage=productList.get(item).getBase64();}
@@ -491,7 +516,20 @@ try {
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
-
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private void chooseImage() {
         Intent intent=new Intent();
         intent.setType("image/*");
@@ -868,7 +906,6 @@ try {
 //
 //
 //
-//
     }
 
 
@@ -1018,14 +1055,45 @@ try {
 
 
     private void showCreatNotification() {
+        final String numUser=null ;
+
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(Home.this);
-        alertDialog.setTitle(getString(R.string.Add_new_Category));
+        alertDialog.setTitle(getString(R.string.create_new_Notification));
         alertDialog.setMessage(getString(R.string.Please_fill_full_information));
 
         LayoutInflater inflater =this.getLayoutInflater();
+
         View add_menu_layout =inflater.inflate(R.layout.create_new_notification,null);
 
-        edtName=add_menu_layout.findViewById(R.id.edtName);
+        final MaterialEditText titleNotification=add_menu_layout.findViewById(R.id.titleNotification);
+        final MaterialEditText textNotification=add_menu_layout.findViewById(R.id.textNotification);
+        final MaterialEditText SelectUser=add_menu_layout.findViewById(R.id.SelectUser);
+        final Switch sipleSwitch =(Switch)add_menu_layout.findViewById(R.id.switch1);
+        final LinearLayout linearLayout =(LinearLayout)add_menu_layout.findViewById(R.id.linearlayoutuserphone);
+        linearLayout.setVisibility(View.GONE);
+
+        //check current state of a Switch (true or false).
+
+        final Boolean[] userPrivet = {false};
+        sipleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                if(isChecked){
+                    linearLayout.setVisibility(View.VISIBLE);
+                    userPrivet[0] =true;
+
+                }else{
+                    linearLayout.setVisibility(View.GONE);
+                    userPrivet[0] =false;
+                }
+
+
+            }
+        });
+
+
+
         btnSelect=add_menu_layout.findViewById(R.id.btnSelect);
         btnUpload=add_menu_layout.findViewById(R.id.btnUpload);
 
@@ -1041,8 +1109,7 @@ try {
             @Override
             public void onClick(View view) {
 
-
-
+             createNotificationinSDB(userPrivet[0],titleNotification.getText().toString(),textNotification.getText().toString(), SelectUser.getText().toString());
             }
         });
 
@@ -1067,6 +1134,61 @@ try {
 //            }
 //        });
         alertDialog.show();
+    }
+
+    private void createNotificationinSDB(final Boolean privetUser , final String title, final String text, final String users){
+
+        //For use SportDialog , please use AlertDialog from android.app  , not from v7 like above AlertDialog
+        final android.app.AlertDialog waitingDialog=new SpotsDialog(Home.this);
+        waitingDialog.show();
+
+        String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/uplodeNotification.php";
+      //  String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/test.php";
+       try {
+           Bitmap bitmap = ImageLoader.init().from(selectedPhoto).requestSize(900, 600).getBitmap();
+
+
+        ////////////////////////////////////////////////////////
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.WEBP, 40, baos);
+        byte[] byteImage_photo = baos.toByteArray();
+        encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
+       }catch (Exception e){
+           waitingDialog.dismiss();
+       }
+
+       // Log.d("43554654", encodedImage);
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        waitingDialog.dismiss();
+                        Toast.makeText(Home.this, response, Toast.LENGTH_SHORT).show();
+                    }
+                },     new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                waitingDialog.dismiss();
+                // Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params =new HashMap<>();
+                params.put("title",title);
+                params.put("text",text);
+                params.put("users",users);
+                if (privetUser) {
+                    params.put("privetUser", "true");
+                }else { params.put("privetUser", "false");}
+                params.put("image",encodedImage);
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
     }
 
     private void showChangePasswordDialog() {

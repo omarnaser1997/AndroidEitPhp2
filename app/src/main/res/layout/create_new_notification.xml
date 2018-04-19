@@ -15,12 +15,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Special Notification" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayoutuserphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/SelectUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select Users"
+                android:inputType="phone"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"
+
+                android:textSize="24sp"
+                app:met_baseColor="@color/colorPrimary"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="@color/colorPrimary"
+
+                app:met_singleLineEllipsis="true" />
+        </LinearLayout>
+
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtName"
+            android:id="@+id/titleNotification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorPrimary"
-            android:hint="@string/Name"
+            android:hint="@string/TitleNotification"
             android:inputType="text"
             android:text=""
             android:textColor="@color/colorPrimary"
@@ -32,11 +71,26 @@
 
             app:met_singleLineEllipsis="true" />
 
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/textNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:hint="@string/textofnotification"
+            android:inputType="text"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp"
+            app:met_baseColor="@color/colorPrimary"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_singleLineEllipsis="true" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="2">
 
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnSelect"
@@ -65,7 +119,7 @@
                 android:layout_marginRight="8dp"
                 android:background="@color/btnSignUp"
                 android:backgroundTint="@color/btnSignUp"
-                android:text="@string/UPLOAD"
+                android:text="@string/CreateNotification"
                 android:textColor="@android:color/white"
                 app:buttonColor="@color/colorPrimaryDark"
                 app:shadowColor="@color/color_black"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/fbutton_color_turquoise"
     tools:context="com.naser.omar.androideitserverphp.MainActivity">
 
     <LinearLayout
@@ -19,22 +19,28 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.59000003">
+        app:layout_constraintVertical_bias="0.23000002">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:srcCompat="@drawable/logo_eat_it" />
+        <TextView
+            android:id="@+id/txtSlogan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="المتوسط"
+            android:textColor="@color/white"
+            android:textSize="70sp" />
 
         <TextView
             android:id="@+id/txtSlogan"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="20dp"
             android:text="@string/slogan"
+            android:textSize="20sp"
             android:textColor="@color/white" />
 
     </LinearLayout>
@@ -83,8 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:background="@color/btnSignUp"
-            android:backgroundTint="@color/btnSignUp"
+            android:background="@color/btnSingnUp"
+            android:backgroundTint="@color/btnSingnUp"
             android:onClick="Singup"
             android:text="@string/SingnUp"
             android:textColor="@android:color/white"
@@ -114,7 +120,7 @@
             android:backgroundTint="@android:color/white"
             android:onClick="Singin"
             android:text="@string/SingnIn"
-            android:textColor="@color/btnSignUp"
+            android:textColor="@color/btnSingnUp"
             app:buttonColor="@color/fbutton_color_midnight_blue"
             app:shadowColor="@android:color/black"
 
