@@ -95,6 +95,7 @@ import com.naser.omar.androideitserverphp.Model.Category;
 import com.naser.omar.androideitserverphp.Model.Image64;
 import com.naser.omar.androideitserverphp.Notificaton.NotificationPicture;
 import com.naser.omar.androideitserverphp.Service.ListenOrder;
+import com.naser.omar.androideitserverphp.Test.imageSlider;
 import com.naser.omar.androideitserverphp.ViewHolder.FoodViewHolder;
 import com.naser.omar.androideitserverphp.ViewHolder.MenuViewHolder;
 import com.naser.omar.androideitserverphp.ViewHolder.MoviesAdapter;
@@ -172,7 +173,7 @@ public class Home extends AppCompatActivity
         setSupportActionBar(toolbar);
         galleryPhoto = new GalleryPhoto(getApplicationContext());
         listimage64=new ArrayList<String>();
-       // I written this Function for using Paper Library
+        // I written this Function for using Paper Library
         Paper.init(this);
 
 
@@ -186,26 +187,26 @@ public class Home extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-             //   Picasso.with(getApplication()).load("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg").into(target);
+                //   Picasso.with(getApplication()).load("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg").into(target);
 
-             //   getBitmapFromURLl("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
+                //   getBitmapFromURLl("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
 
-               // File bitmapFile = new File(Environment.getExternalStorageDirectory() + "/" + "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
-              //  Bitmap bitmap = BitmapFactory.decodeFile(bitmapFile);
+                // File bitmapFile = new File(Environment.getExternalStorageDirectory() + "/" + "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
+                //  Bitmap bitmap = BitmapFactory.decodeFile(bitmapFile);
 
 
-               // Bitmap gg= getBitmapFromURL("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
-              //  Toast.makeText(Home.this, ""+gg, Toast.LENGTH_SHORT).show();
-                  //printAllNotficationinDB();
+                // Bitmap gg= getBitmapFromURL("https://omarnaser.000webhostapp.com/AndroidEitServerPHP/Category/1518536467.jpeg");
+                //  Toast.makeText(Home.this, ""+gg, Toast.LENGTH_SHORT).show();
+                //printAllNotficationinDB();
 
                 // printAllIDNotification();
-               // Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
+                // Log.d("875765348943", new Database(getApplicationContext()).getNotification().get(9).getImageURL());
 
-
+//
                 Intent cartIntent=new Intent(Home.this,Cart.class);//نافذه المشتريات
                 startActivity(cartIntent);
 
-//                Intent TESTMainActivitye=new Intent(Home.this,TESTMainActivitye.class);//نافذه المشتريات
+//                Intent TESTMainActivitye=new Intent(Home.this, imageSlider.class);//نافذه المشتريات
 //                  startActivity(TESTMainActivitye);
 
             }
@@ -233,12 +234,12 @@ public class Home extends AppCompatActivity
 
 
 
-try {
-    Picasso.with(this).load(new Database(getApplicationContext()).getUser().get(0).getImage()).into(drawerImage);
-}catch (Exception e){
+        try {
+            Picasso.with(this).load(new Database(getApplicationContext()).getUser().get(0).getImage()).into(drawerImage);
+        }catch (Exception e){
 
-    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-}
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
         if(new Database(getApplicationContext()).getUser().get(0).getImage().contains("null")){
             drawerImage.setImageResource(R.drawable.ic_face_black_24dp);
@@ -290,10 +291,12 @@ try {
 
                     loadMenu(userpage-2);
                 }else {
-                    Toast.makeText(getBaseContext(), getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
-
+                   // Toast.makeText(getBaseContext(), getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
+//                    Intent intent=new Intent(Home.this,NoWifiActivity.class);
+//                    startActivity(intent);
+//                    finish();
                     //show data from local DB (SQLite)
-                    ShowDataFromLDB();
+                    //ShowDataFromLDB();
                     return;
                 }
             }
@@ -305,15 +308,21 @@ try {
             public void run() {
                 if (Common.isConnectedToInternet(getBaseContext())){
                     //image form LDB
-                  try{  new Database(getApplicationContext()).deleteAllformImage();}catch (Exception e){
-                      Toast.makeText(Home.this, e.toString(), Toast.LENGTH_SHORT).show();
-                  }
-                   // loadMenu(1);
+                    try{  new Database(getApplicationContext()).deleteAllformImage();}catch (Exception e){
+                        Toast.makeText(Home.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                    // loadMenu(1);
                 }else {
-                    Toast.makeText(getBaseContext(), getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getBaseContext(), getString(R.string.please_check_your_connection), Toast.LENGTH_SHORT).show();
                     //show data from local DB (SQLite)
-                    ShowDataFromLDB();
-                    t1.speak("please check your connection", TextToSpeech.QUEUE_FLUSH, null);
+                   // ShowDataFromLDB();
+                   // t1.speak("please check your connection", TextToSpeech.QUEUE_FLUSH, null);
+                    Intent intent=new Intent(Home.this,NoWifiActivity.class);
+                    startActivity(intent);
+                    finish();
+
+
+
                     return;
                 }
 
@@ -569,8 +578,13 @@ try {
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            loadMenu(userpage-1);//تحديث القائمة
+            //loadMenu(userpage-1);//تحديث القائمة
             // Handle the camera action
+
+                Intent TESTMainActivitye=new Intent(Home.this, imageSlider.class);//نافذه المشتريات
+                 startActivity(TESTMainActivitye);
+
+
         } else if (id == R.id.nav_cart) {
             Intent cartintent =new Intent(Home.this,Cart.class);
             startActivity(cartintent);
@@ -597,7 +611,7 @@ try {
         }
 
         else if (id == R.id.nav_Notification) {
-           showCreatNotification();
+            showCreatNotification();
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -608,19 +622,19 @@ try {
     private void ShowDataFromLDB() {
 
 
-    List<Image64> result;
-    List<Category> listCategory=new ArrayList<>();
+        List<Image64> result;
+        List<Category> listCategory=new ArrayList<>();
 
-    //get Data from LDB  (local database)
-    result= new Database(this).getImage64();
+        //get Data from LDB  (local database)
+        result= new Database(this).getImage64();
 
-    //convert Image64 to Category
-    for(Image64 item:result)
-    {
-        Category category=new Category(item.getName(),item.getId(),item.image64bit);
-        listCategory.add(category);
+        //convert Image64 to Category
+        for(Image64 item:result)
+        {
+            Category category=new Category(item.getName(),item.getId(),item.image64bit);
+            listCategory.add(category);
 
-    }
+        }
 
         productList.addAll(listCategory);
 
@@ -669,20 +683,20 @@ try {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                      //  Log.d("254362343",response);
+                        //  Log.d("254362343",response);
 
                         notificationList = new JsonConverter<AppNotification>().toArrayList(response, AppNotification.class);//تحوي الجيسون الى كلاس
-                       // Toast.makeText(Home.this, notificationList.get(0).getImageURL(), Toast.LENGTH_SHORT).show();
-                       // Log.d("25436678443",notificationList.get(0).getImageURL().toString());
-                       // Log.d("254336778443",notificationList.get(0).getView()+"");
+                        // Toast.makeText(Home.this, notificationList.get(0).getImageURL(), Toast.LENGTH_SHORT).show();
+                        // Log.d("25436678443",notificationList.get(0).getImageURL().toString());
+                        // Log.d("254336778443",notificationList.get(0).getView()+"");
 
 
                         //Add all notification from SDB to LDB
                         for (AppNotification notification:notificationList) {
-                           try{ new Database(getApplication()).addNotification(notification);}
-                           catch (Exception e){
-                              // Toast.makeText(Home.this, e.toString(), Toast.LENGTH_SHORT).show();
-                           }
+                            try{ new Database(getApplication()).addNotification(notification);}
+                            catch (Exception e){
+                                // Toast.makeText(Home.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                     }
@@ -716,13 +730,13 @@ try {
         }
 
 
-    try {
-    productListjson = new JsonConverter<Category>().toArrayList(response, Category.class);//تحوي الجيسون الى كلاس
-    productList.addAll(productListjson);
+        try {
+            productListjson = new JsonConverter<Category>().toArrayList(response, Category.class);//تحوي الجيسون الى كلاس
+            productList.addAll(productListjson);
 
-    }catch (Exception e){
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-    }
+        }catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -794,7 +808,7 @@ try {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // t1.speak("Good-bye "+Common.currentUser.getName(), TextToSpeech.QUEUE_FLUSH, null);
+        // t1.speak("Good-bye "+Common.currentUser.getName(), TextToSpeech.QUEUE_FLUSH, null);
 
     }
 
@@ -1109,7 +1123,7 @@ try {
             @Override
             public void onClick(View view) {
 
-             createNotificationinSDB(userPrivet[0],titleNotification.getText().toString(),textNotification.getText().toString(), SelectUser.getText().toString());
+                createNotificationinSDB(userPrivet[0],titleNotification.getText().toString(),textNotification.getText().toString(), SelectUser.getText().toString());
             }
         });
 
@@ -1143,21 +1157,21 @@ try {
         waitingDialog.show();
 
         String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/uplodeNotification.php";
-      //  String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/test.php";
-       try {
-           Bitmap bitmap = ImageLoader.init().from(selectedPhoto).requestSize(900, 600).getBitmap();
+        //  String Url="https://omarnaser.000webhostapp.com/AndroidEitServerPHP/test.php";
+        try {
+            Bitmap bitmap = ImageLoader.init().from(selectedPhoto).requestSize(900, 600).getBitmap();
 
 
-        ////////////////////////////////////////////////////////
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.WEBP, 40, baos);
-        byte[] byteImage_photo = baos.toByteArray();
-        encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
-       }catch (Exception e){
-           waitingDialog.dismiss();
-       }
+            ////////////////////////////////////////////////////////
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.WEBP, 40, baos);
+            byte[] byteImage_photo = baos.toByteArray();
+            encodedImage = Base64.encodeToString(byteImage_photo, Base64.DEFAULT);
+        }catch (Exception e){
+            waitingDialog.dismiss();
+        }
 
-       // Log.d("43554654", encodedImage);
+        // Log.d("43554654", encodedImage);
 
         StringRequest stringRequest=new StringRequest(Request.Method.POST, Url,
                 new Response.Listener<String>() {

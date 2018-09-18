@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class Cart extends Activity implements Response.Listener<String> {
     List<Order> cart =new ArrayList<>();
     CartAdapter adapter;
     RelativeLayout rootLayout;
+    String part="1";//part of request الفرع الخاص بالطلبية
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,32 @@ public class Cart extends Activity implements Response.Listener<String> {
 
     }
 
+
+    //when you select one of Redio Button عند اختيارك لأحد الفرلاوع
+    public void onRadioButtonClicked(View view) {
+
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_pirates:
+                if (checked)
+                    // Pirates are the best
+                    Toast.makeText(this, "تم اختيار الفرع الخاص باللاذقية", Toast.LENGTH_SHORT).show();
+                part="1";
+                break;
+            case R.id.radio_ninjas:
+                if (checked)
+                    // Ninjas rule
+                    part="2";
+                Toast.makeText(this, "تم اختيار الفرع الخاص بمدينة حلب", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+
+    }
+
     private void ShowAlertDialog(){
 
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(Cart.this);
@@ -94,6 +122,7 @@ public class Cart extends Activity implements Response.Listener<String> {
 
         alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
 
         alertDialog.setPositiveButton(getString(R.string.YES),new DialogInterface.OnClickListener() {
             @Override
@@ -127,9 +156,18 @@ public class Cart extends Activity implements Response.Listener<String> {
             }
         });
         alertDialog.show();
+
+
     }
+
+
+
     private void UplodeRequestToServer(final Request request,final String dataRequest) {
 
+
+        if(part==null){
+            Toast.makeText(this, "الرجاء ادخال الفرع الذي تريد ارسال الطلب له", Toast.LENGTH_SHORT).show();
+        }
 
         StringRequest stringRequest=new StringRequest(com.android.volley.Request.Method.POST, "https://omarnaser.000webhostapp.com/AndroidEitServerPHP/SetRequest.php", (Response.Listener<String>) this, new Response.ErrorListener() {
             @Override
@@ -143,8 +181,10 @@ public class Cart extends Activity implements Response.Listener<String> {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params =new HashMap<>();
-               Log.d("omarrrr",dataRequest);
+               Log.d("dataRequest514654165",dataRequest);
                 params.put("Phone",request.getPhone());//typProdect
+
+                params.put("part",part);//part of request
 
                 params.put("Name",request.getName());//typProdect
 

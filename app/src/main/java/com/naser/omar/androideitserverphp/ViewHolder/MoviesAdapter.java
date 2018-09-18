@@ -258,6 +258,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     activity.startActivity(foodList);
 
 
+
                    Picasso.with(context)
                            .load(moviesList.get(position).getImage())
                            .into(target);

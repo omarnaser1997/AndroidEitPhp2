@@ -33,6 +33,12 @@ public class Category {
     public Category() {
     }
 
+    public Category(String name, String categoryID, String base64,String image) {
+        Name = name;
+        this.categoryID = categoryID;
+        this.base64 = base64;
+        this.Image=image;
+    }
     public Category(String name, String categoryID, String base64) {
         Name = name;
         this.categoryID = categoryID;

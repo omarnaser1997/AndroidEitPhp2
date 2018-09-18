@@ -460,8 +460,8 @@ public class FoodList extends Activity  implements Response.Listener<String>{
     @Override
     public void onResponse(String response) {
 
-        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
-        Log.d("3564543",response);
+       // Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+        //Log.d("3564543",response);
 
         //the list of page is fineshed
         if (response.contains("Array")){

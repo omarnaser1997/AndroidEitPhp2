@@ -38,6 +38,8 @@ android {
 
 
 dependencies {
+
+    compile 'com.daimajia.slider:library:1.1.5@aar'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -99,5 +101,8 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.28.0'
 
     compile 'de.hdodenhof:circleimageview:2.2.0'
+
+    implementation 'com.nineoldandroids:library:2.4.0'
+
 
 }

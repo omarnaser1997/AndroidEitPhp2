@@ -343,7 +343,7 @@ public class FoodDetail extends AppCompatActivity implements
             public void processFinish(String s) {
                 mDialog.dismiss();
                // loadListFood(categoryId);
-                   Toast.makeText(FoodDetail.this, s, Toast.LENGTH_SHORT).show();
+                  // Toast.makeText(FoodDetail.this, s, Toast.LENGTH_SHORT).show();
                 // Snackbar.make(rootLayout," Food"+productList.get(item).getName()+"was "+statment, Snackbar.LENGTH_LONG).show();
             }
         });
@@ -487,7 +487,7 @@ public class FoodDetail extends AppCompatActivity implements
                     @Override
                     public void onResponse(String response) {
                         mDialog.dismiss();
-                        Toast.makeText(FoodDetail.this, getString(R.string.Thank_you_for_submit_rating), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(FoodDetail.this, getString(R.string.Thank_you_for_submit_rating), Toast.LENGTH_SHORT).show();
 
                     }
                 },     new Response.ErrorListener() {
